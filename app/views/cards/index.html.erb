@@ -1,0 +1,13 @@
+<h1>Cards</h1>
+
+<ul class="list-group-item" ss="list-group">
+  <% @cards.each do |card| %>
+    <li class="list-group-item">
+      <%= card.original_text %>
+      <%= card.translated_text %>
+    </li>
+    <li class="list-group-item">
+      <%= card.review_date.strftime("%d/%m/%Y") %>
+    </li>
+  <% end %>
+</ul>
