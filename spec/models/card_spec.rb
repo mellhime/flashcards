@@ -2,9 +2,8 @@ require 'rails_helper'
 
 describe Card do
 
-  before do @card = Card.new(original_text: "Example", translated_text: "Пример", 
-  							review_date: "01.01.2001")
-	end
+  before do @card = Card.new(original_text: "Example", translated_text: "Пример", review_date: "01.01.2001")
+  end
 
   subject { @card }
 
