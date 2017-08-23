@@ -41,6 +41,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'factory_girl'
 end
 
 group :development do
