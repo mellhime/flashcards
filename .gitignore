@@ -10,7 +10,6 @@
 /tmp
 
 # Игнорирование прочих файлов.
-/config/database.yml
 doc/
 *.swp
 *~
@@ -18,3 +17,4 @@ doc/
 .DS_Store
 .idea
 .secret
+database.yml
