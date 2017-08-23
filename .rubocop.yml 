@@ -1,13 +1,6 @@
 AllCops:
-  Include:
-    - Rakefile
-    - config.ru
-    - lib/**/*.rake
   Exclude:
     - db/schema.rb
-
-Rails:
-  Enabled: true
 
 Metrics/LineLength:
   Description: 'Limit lines to 80 characters.'
@@ -18,3 +11,10 @@ Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
   StyleGuide: '#consistent-string-literals'
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+  

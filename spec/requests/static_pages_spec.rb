@@ -7,7 +7,7 @@ describe "Static pages" do
 
     it "should have the content 'Флэшкарточкер'" do
       visit '/'
-    expect(page).to have_content('Флэшкарточкер')
+      expect(page).to have_content('Флэшкарточкер')
     end
   end
 end
