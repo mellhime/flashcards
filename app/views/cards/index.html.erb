@@ -9,5 +9,19 @@
     <li class="list-group-item">
       <%= card.review_date.strftime("%d/%m/%Y") %>
     </li>
+    <ul class="list-inline">
+      <li>
+        <%= link_to "show", card_path(card) %></li>
+      <li>
+        <%= link_to "edit", edit_card_path(card) %>
+      <li>
+      <li><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
+        "You sure?" } %></li>
+    </ul>
+
   <% end %>
+
+  <p>
+    <%= link_to 'Back', cards_path %>
+  </p>
 </ul>
