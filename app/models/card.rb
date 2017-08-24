@@ -1,5 +1,5 @@
 class Card < ApplicationRecord
-  before_validation :create_review_date
+  after_initialize :create_review_date
   VALID_ORIGINAL_TEXT_REGEX = /[A-Za-z]/
   validates :original_text, presence: true, length: { maximum: 35 }, format: { with: VALID_ORIGINAL_TEXT_REGEX }
   VALID_TRANSLATED_TEXT_REGEX = /[а-яА-ЯёЁ]/
