@@ -1,3 +1,4 @@
+<%= simple_form_for @card do |f| %>
 <% if @card.errors.any? %>
   <div id="error_explanation">
     <h2>
@@ -11,8 +12,6 @@
     </ul>
   </div>
 <% end %>
-
-<%= simple_form_for @card do |f| %>
 <p>
   <%= f.input :original_text, hint: 'in English' %>
 </p>
