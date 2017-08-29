@@ -1,7 +1,7 @@
-class MyParser
+require 'open-uri'
+require 'nokogiri'
 
-  require 'open-uri'
-  require 'nokogiri'
+class CardParser
 
   def self.perform
     url = 'http://www.en365.ru/top100.htm'
