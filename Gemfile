@@ -45,6 +45,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'will_paginate'
 end
 
 group :development do

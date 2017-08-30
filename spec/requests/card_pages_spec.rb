@@ -7,9 +7,8 @@ describe "Card pages" do
 
   describe "index" do
     before do
-      FactoryGirl.create(:card)
       FactoryGirl.create(:card, original_text: "Example", translated_text: "Пример")
-      FactoryGirl.create(:card, original_text: "Example", translated_text: "Пример")
+      FactoryGirl.create(:card, original_text: "NewExample", translated_text: "НовыйПример")
       visit cards_path
     end
 
@@ -19,6 +18,20 @@ describe "Card pages" do
     it "should list each user" do
       Card.all.each do |card|
         expect(page).to have_selector('li', text: card.original_text)
+      end
+    end
+
+    describe "pagination" do
+
+      before(:all) { 30.times { FactoryGirl.create(:card) } }
+      after(:all)  { Card.delete_all }
+
+      it { should have_selector('div.pagination') }
+
+      it "should list each card" do
+        Card.paginate(page: 1).each do |card|
+          expect(page).to have_selector('li', text: card.original_text)
+        end
       end
     end
   end
@@ -63,11 +76,18 @@ describe "Card pages" do
       it { should have_title("Редактирование") }
     end
 
-    describe "with invalid information" do
-      before { click_button "Update Card" }
+    describe "with valid information" do
+      let(:new_orig_text)  { "New Example" }
+      let(:new_trans_text) { "Новый Пример" }
+      before do
+        fill_in "Original text", with: new_orig_text
+        fill_in "Translated text", with: new_trans_text
+        click_button "Update Card"
+      end
 
-      it { should have_content('error') }
+      it { should have_title(new_orig_text) }
+      it { expect(card.reload.original_text).to eq new_orig_text }
+      it { expect(card.reload.translated_text).to eq new_trans_text }
     end
   end
-
 end

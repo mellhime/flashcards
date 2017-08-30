@@ -1,6 +1,8 @@
 <% provide(:title, 'Все карточки') %>
 <h1>Все карточки</h1>
 
+<%= will_paginate %>
+
 <ul class="list-group-item" ss="list-group">
   <% @cards.each do |card| %>
     <li class="list-group-item">
@@ -19,10 +21,7 @@
       <li><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
         "You sure?" } %></li>
     </ul>
-
   <% end %>
-
-  <p>
-    <%= link_to 'Back', cards_path %>
-  </p>
 </ul>
+
+<%= will_paginate %>

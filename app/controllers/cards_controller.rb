@@ -1,8 +1,8 @@
 class CardsController < ApplicationController
-  before_action :find_card, only: [:show, :edit, :update, :destroy]
+  before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
 
   def index
-    @cards = Card.all
+    @cards = Card.paginate(page: params[:page])
   end
 
   def show
@@ -35,6 +35,20 @@ class CardsController < ApplicationController
   def destroy
     @card.destroy
     redirect_to cards_path
+  end
+
+  def get_random_card
+    @card = Card.can_be_reviewed.sample
+  end
+
+  def check
+    if params[:card][:original_text] == @card.original_text
+      flash.now[:success] = "Правильно!"
+      @card.update_attributes(review_date: Time.now + 259200)
+    else
+      flash.now[:danger] = "Неправильно!"
+    end
+    render 'get_random_card'
   end
 
   private

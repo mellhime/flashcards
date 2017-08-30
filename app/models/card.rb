@@ -14,4 +14,6 @@ class Card < ApplicationRecord
   def equality_of_original_and_translated_texts
     errors.add(:translated_text, "can't be the same as original") if original_text.downcase == translated_text.downcase
   end
+
+  scope :can_be_reviewed, -> { where(review_date: Date.today) }
 end
