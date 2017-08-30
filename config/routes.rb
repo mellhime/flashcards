@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
   resources :cards
-  root 'static_pages#home'
+  root 'cards#get_random_card'
+  match '/check', to: 'cards#check', via: 'patch'
 end

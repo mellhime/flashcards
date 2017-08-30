@@ -43,12 +43,12 @@ class CardsController < ApplicationController
 
   def check
     if params[:card][:original_text] == @card.original_text
-      flash.now[:success] = "Правильно!"
+      flash[:success] = "Правильно!"
       @card.update_attributes(review_date: Time.now + 259200)
     else
-      flash.now[:danger] = "Неправильно!"
+      flash[:danger] = "Неправильно!"
     end
-    render 'get_random_card'
+    redirect_to root_path
   end
 
   private
