@@ -1,5 +1,5 @@
 class Card < ApplicationRecord
-  before_validation :create_review_date, on: :create
+  #before_validation :create_review_date, on: :create
   VALID_ORIGINAL_TEXT_REGEX = /[A-Za-z]/
   validates :original_text, presence: true, length: { maximum: 35 }, format: { with: VALID_ORIGINAL_TEXT_REGEX }
   VALID_TRANSLATED_TEXT_REGEX = /[А-Яа-я]+/
@@ -15,5 +15,5 @@ class Card < ApplicationRecord
     errors.add(:translated_text, "can't be the same as original") if original_text.downcase == translated_text.downcase
   end
 
-  scope :can_be_reviewed, -> { where(review_date: Date.today) }
+  scope :can_be_reviewed, lambda { where('DATE(review_date) <= ?', Date.today)}
 end

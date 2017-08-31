@@ -60,9 +60,9 @@ describe Card do
     it "should be valid" do
       expect(@card.review_date).not_to be_nil
     end
-    # it "should be 3 days from now" do
-    #   expect(@card.review_date).to eq(Time.now.localtime("+00:00") + 259200)
-    # end
+    it "should be 3 days from now" do
+      expect(@card.review_date).to eq(Time.now.localtime("+00:00") + 259200)
+    end
   end
 
 end

@@ -18,6 +18,3 @@ doc/
 .idea
 .secret
 database.yml
-
-# Игнорирование тестов
-/spec

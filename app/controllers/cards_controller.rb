@@ -37,16 +37,17 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
-  def get_random_card
+  def random
     @card = Card.can_be_reviewed.sample
   end
 
   def check
-    if params[:card][:original_text] == @card.original_text
+    result = CheckCard.call(user_text: params[:user_text], card: @card)
+
+    if result.success?
       flash[:success] = "Правильно!"
-      @card.update_attributes(review_date: Time.now + 259200)
     else
-      flash[:danger] = "Неправильно!"
+      flash[:danger] = result.message
     end
     redirect_to root_path
   end

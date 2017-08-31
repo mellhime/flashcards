@@ -6,7 +6,7 @@ describe "Static pages" do
   describe "Home page" do
 
     it "should have the content 'Флэшкарточкер'" do
-      visit '/'
+      visit root_path
       expect(page).to have_content('Флэшкарточкер')
     end
   end
