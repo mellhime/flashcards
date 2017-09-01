@@ -1,28 +1,27 @@
 <% provide(:title, 'Все карточки') %>
-<h1>Все карточки</h1>
+  <h1>Все карточки</h1>
 
-<ul class="list-group-item" ss="list-group">
-  <% @cards.each do |card| %>
-    <li class="list-group-item">
-      <%= card.original_text %>
-      <%= card.translated_text %>
-    </li>
-    <li class="list-group-item">
-      <%= card.review_date.strftime("%d/%m/%Y") %>
-    </li>
-    <ul class="list-inline">
-      <li>
-        <%= link_to "show", card_path(card) %></li>
-      <li>
-        <%= link_to "edit", edit_card_path(card) %>
-      <li>
-      <li><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
-        "You sure?" } %></li>
-    </ul>
+  <%= will_paginate %>
 
-  <% end %>
-
-  <p>
-    <%= link_to 'Back', cards_path %>
-  </p>
+  <ul class="list-group-item" ss="list-group">
+    <% @cards.each do |card| %>
+      <li class="list-group-item">
+        <%= card.original_text %>
+        <%= card.translated_text %>
+      </li>
+      <li class="list-group-item">
+        <%= card.review_date.strftime("%d/%m/%Y") %>
+      </li>
+      <ul class="list-inline">
+        <li>
+          <%= link_to "show", card_path(card) %></li>
+        <li>
+          <%= link_to "edit", edit_card_path(card) %>
+        <li>
+        <li><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
+          "You sure?" } %></li>
+      </ul>
+    <% end %>
 </ul>
+
+<%= will_paginate %>

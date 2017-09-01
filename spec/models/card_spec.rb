@@ -60,9 +60,22 @@ describe Card do
     it "should be valid" do
       expect(@card.review_date).not_to be_nil
     end
-    # it "should be 3 days from now" do
-    #   expect(@card.review_date).to eq(Time.now.localtime("+00:00") + 259200)
-    # end
+    it "should be 3 days from now" do
+      expect(@card.review_date).to eq(Date.today + 3.days)
+    end
   end
 
+  describe "scope can_be_reviewed" do
+    it "excludes cards that can't be reviewed" do
+      @card = FactoryGirl.create(:card)
+      @card.update_attributes(review_date: Date.today + 2.days)
+      Card.can_be_reviewed.should_not include(@card)
+    end
+
+    it "includes cards that can be reviewed" do
+      @card = FactoryGirl.create(:card)
+      @card.update_attributes(review_date: Date.today - 2.days)
+      Card.can_be_reviewed.should include(@card)
+    end
+  end
 end

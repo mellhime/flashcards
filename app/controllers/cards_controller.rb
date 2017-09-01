@@ -1,8 +1,8 @@
 class CardsController < ApplicationController
-  before_action :find_card, only: [:show, :edit, :update, :destroy]
+  before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
 
   def index
-    @cards = Card.all
+    @cards = Card.paginate(page: params[:page])
   end
 
   def show
@@ -35,6 +35,21 @@ class CardsController < ApplicationController
   def destroy
     @card.destroy
     redirect_to cards_path
+  end
+
+  def random
+    @card = Card.can_be_reviewed.order("RANDOM()").first
+  end
+
+  def check
+    result = CheckCard.call(user_text: params[:user_text], card: @card)
+
+    if result.success?
+      flash[:success] = result.message
+    else
+      flash[:danger] = result.message
+    end
+    redirect_to root_path
   end
 
   private
