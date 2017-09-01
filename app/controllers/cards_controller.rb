@@ -38,14 +38,14 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = Card.can_be_reviewed.sample
+    @card = Card.can_be_reviewed.order("RANDOM()").first
   end
 
   def check
     result = CheckCard.call(user_text: params[:user_text], card: @card)
 
     if result.success?
-      flash[:success] = "Правильно!"
+      flash[:success] = result.message
     else
       flash[:danger] = result.message
     end

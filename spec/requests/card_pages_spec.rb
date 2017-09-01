@@ -1,6 +1,23 @@
 require 'spec_helper'
 require 'rails_helper'
 
+describe CheckCard do
+  before do
+    @card = FactoryGirl.create(:card)
+  end
+
+  it ".call should check card and success if valid" do
+    interactor = CheckCard.call(user_text: "Sun", card: @card)
+    expect(interactor).to be_a_success
+    expect(interactor.card.review_date).to eq((Date.today + 3.days))
+  end
+
+  it ".call should check card and fail if not valid" do
+    interactor = CheckCard.call(user_text: "Suh", card: @card)
+    expect(interactor).to be_a_failure
+  end
+end
+
 describe "Card pages" do
 
   subject { page }
@@ -14,12 +31,9 @@ describe "Card pages" do
 
     it { should have_content('Все карточки') }
     it { should have_title('Все карточки') }
-
-    it "should list each user" do
-      Card.all.each do |card|
-        expect(page).to have_selector('li', text: card.original_text)
-      end
-    end
+    it { should have_link('edit') }
+    it { should have_link('show') }
+    it { should have_link('delete') }
 
     describe "pagination" do
 
@@ -88,6 +102,20 @@ describe "Card pages" do
       it { should have_title(new_orig_text) }
       it { expect(card.reload.original_text).to eq new_orig_text }
       it { expect(card.reload.translated_text).to eq new_trans_text }
+    end
+
+    describe "with invalid information" do
+      let(:new_orig_text)  { "New Example" }
+      let(:new_trans_text) { "New Example" }
+      before do
+        fill_in "Original text", with: new_orig_text
+        fill_in "Translated text", with: new_trans_text
+        click_button "Update Card"
+      end
+
+      it { should have_content("errors") }
+      it { expect(card.reload.original_text).to eq card.original_text }
+      it { expect(card.reload.translated_text).to eq card.translated_text }
     end
   end
 end
