@@ -1,22 +1,4 @@
-require 'spec_helper'
 require 'rails_helper'
-
-describe CheckCard do
-  before do
-    @card = FactoryGirl.create(:card)
-  end
-
-  it ".call should check card and success if valid" do
-    interactor = CheckCard.call(user_text: "Sun", card: @card)
-    expect(interactor).to be_a_success
-    expect(interactor.card.review_date).to eq((Date.today + 3.days))
-  end
-
-  it ".call should check card and fail if not valid" do
-    interactor = CheckCard.call(user_text: "Suh", card: @card)
-    expect(interactor).to be_a_failure
-  end
-end
 
 describe "Card pages" do
 
@@ -116,6 +98,21 @@ describe "Card pages" do
       it { should have_content("errors") }
       it { expect(card.reload.original_text).to eq card.original_text }
       it { expect(card.reload.translated_text).to eq card.translated_text }
+    end
+  end
+
+
+  describe "delete links" do
+
+    let(:card) { FactoryGirl.create(:card) }
+
+    before do
+      visit cards_path
+    end
+
+    it { should have_link('delete', href: card_path(card)) }
+    it "should be able to delete card" do
+      expect{click_link('delete', match: :first)}.to change(Card, :count).by(-1)
     end
   end
 end
