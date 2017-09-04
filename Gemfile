@@ -48,6 +48,7 @@ group :development, :test do
   gem 'will_paginate'
   gem "interactor"
   gem 'rake'
+  gem 'rspec-its'
 end
 
 group :development do

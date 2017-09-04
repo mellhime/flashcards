@@ -12,7 +12,7 @@ describe Card do
 
   describe "when original_text is not present" do
     before { card.original_text = " " }
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
   describe "when translated_text is not present" do
@@ -52,19 +52,18 @@ describe Card do
 
   describe "when review_date have been created" do
 
-    let(:card) { create(:card) }
+    its(:review_date) { is_expected.not_to be_nil }
+    its(:review_date) { is_expected.to eq(Date.today + 3.days) }
 
-    it "should be valid" do
-      expect(card.review_date).not_to be_nil
-    end
-    it "should be 3 days from now" do
-      expect(card.review_date).to eq(Date.today + 3.days)
-    end
+    # it "should be valid" do
+    #   expect(card.review_date).not_to be_nil
+    # end
+    # it "should be 3 days from now" do
+    #   expect(card.review_date).to eq(Date.today + 3.days)
+    # end
   end
 
   describe "scope can_be_reviewed" do
-
-    let(:card) { create(:card) }
 
     it "excludes cards that can't be reviewed" do
       card.update_attributes(review_date: Date.today + 2.days)
