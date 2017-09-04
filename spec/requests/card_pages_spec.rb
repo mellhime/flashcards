@@ -6,8 +6,8 @@ describe "Card pages" do
 
   describe "index" do
     before do
-      FactoryGirl.create(:card, original_text: "Example", translated_text: "Пример")
-      FactoryGirl.create(:card, original_text: "NewExample", translated_text: "НовыйПример")
+      create(:card, original_text: "Example", translated_text: "Пример")
+      create(:card, original_text: "NewExample", translated_text: "НовыйПример")
       visit cards_path
     end
 
@@ -19,7 +19,7 @@ describe "Card pages" do
 
     describe "pagination" do
 
-      before(:all) { 30.times { FactoryGirl.create(:card) } }
+      before(:all) { 30.times { create(:card) } }
       after(:all)  { Card.delete_all }
 
       it { should have_selector('div.pagination') }
@@ -34,7 +34,7 @@ describe "Card pages" do
 
   describe "card page" do
     before { visit card_path(card) }
-    let(:card) { FactoryGirl.create(:card) }
+    let(:card) { create(:card) }
     it { should have_content(card.original_text) }
     it { should have_title(card.original_text) }
   end
@@ -64,7 +64,7 @@ describe "Card pages" do
   end
 
   describe "edit card page" do
-    let(:card) { FactoryGirl.create(:card) }
+    let(:card) { create(:card) }
     before { visit edit_card_path(card) }
 
     describe "page" do
@@ -104,7 +104,7 @@ describe "Card pages" do
 
   describe "delete links" do
 
-    let(:card) { FactoryGirl.create(:card) }
+    let(:card) { create(:card) }
 
     before do
       visit cards_path
