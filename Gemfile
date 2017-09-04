@@ -47,6 +47,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'will_paginate'
   gem "interactor"
+  gem 'rake'
 end
 
 group :development do
