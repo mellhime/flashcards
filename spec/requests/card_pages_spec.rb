@@ -73,8 +73,8 @@ describe "Card pages" do
     end
 
     describe "with valid information" do
-      let(:new_orig_text)  { "New Example" }
-      let(:new_trans_text) { "Новый Пример" }
+      let(:new_orig_text)  { "NewExample" }
+      let(:new_trans_text) { "НовыйПример" }
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
@@ -87,8 +87,8 @@ describe "Card pages" do
     end
 
     describe "with invalid information" do
-      let(:new_orig_text)  { "New Example" }
-      let(:new_trans_text) { "New Example" }
+      let(:new_orig_text)  { "NewExample" }
+      let(:new_trans_text) { "NewExample" }
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
