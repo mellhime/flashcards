@@ -51,16 +51,9 @@ describe Card do
   end
 
   describe "when review_date have been created" do
-
+    
     its(:review_date) { is_expected.not_to be_nil }
     its(:review_date) { is_expected.to eq(Date.today + 3.days) }
-
-    # it "should be valid" do
-    #   expect(card.review_date).not_to be_nil
-    # end
-    # it "should be 3 days from now" do
-    #   expect(card.review_date).to eq(Date.today + 3.days)
-    # end
   end
 
   describe "scope can_be_reviewed" do

@@ -104,15 +104,31 @@ describe "Card pages" do
 
   describe "delete links" do
 
-    let(:card) { create(:card) }
-
     before do
+      create(:card)
       visit cards_path
     end
 
-    it { should have_link('delete', href: card_path(card)) }
+    it { should have_link('delete') }
     it "should be able to delete card" do
       expect{click_link('delete', match: :first)}.to change(Card, :count).by(-1)
+    end
+  end
+
+  describe "check card translation" do
+
+    let!(:card) { create(:card) }
+
+    before { visit root_path }
+
+    describe "with valid translation" do
+
+      before do
+        fill_in :user_text, with: card.original_text
+        click_button "Check"
+      end
+        
+      it { expect(page).to have_selector('alert alert-success') }
     end
   end
 end
