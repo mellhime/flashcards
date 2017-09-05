@@ -117,20 +117,23 @@ describe "Card pages" do
 
   describe "check card translation" do
 
+    let!(:card)  { create(:card)}
+    let!(:second_card) { create(:card)}  
+
     before do
-      @card = Card.new(original_text: "NewExample", translated_text: "НовыйПример")
-      @card.update(review_date: Date.today)
+      card.update_attributes(review_date: Date.today)
+      second_card.update_attributes(review_date: Date.today)
       visit root_path
     end
-
+    
     describe "with valid translation" do
 
       before do
-        fill_in :user_text, with: @card.original_text
+        fill_in :user_text, with: card.original_text
         click_button "Check"
       end
         
-      it { expect(page).to have_selector('alert alert-success') }
+      it { expect(page).to have_content('Правильно!') }
     end
   end
 end
