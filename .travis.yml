@@ -6,6 +6,4 @@ services:
 - postgresql
 
 before_script:
-- cp config/database.yml.travis config/database.yml
-- bundle exec rake db:create
-- bundle exec rake db:migrate
+- psql -c 'create database travis_ci_test;' -U postgres
