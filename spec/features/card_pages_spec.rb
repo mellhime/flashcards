@@ -117,14 +117,16 @@ describe "Card pages" do
 
   describe "check card translation" do
 
-    let!(:card) { create(:card) }
-
-    before { visit root_path }
+    before do
+      @card = Card.new(original_text: "NewExample", translated_text: "НовыйПример")
+      @card.update(review_date: Date.today)
+      visit root_path
+    end
 
     describe "with valid translation" do
 
       before do
-        fill_in :user_text, with: card.original_text
+        fill_in :user_text, with: @card.original_text
         click_button "Check"
       end
         
