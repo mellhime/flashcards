@@ -17,4 +17,4 @@ doc/
 .DS_Store
 .idea
 .secret
-database.yml
+-database.yml

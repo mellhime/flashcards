@@ -47,6 +47,9 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'will_paginate'
   gem "interactor"
+  gem 'rake'
+  gem 'rspec-its'
+  gem 'pry'
 end
 
 group :development do
@@ -57,7 +60,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'nokogiri'
-  gem 'pry'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
