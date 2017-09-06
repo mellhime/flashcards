@@ -73,8 +73,8 @@ describe "Card pages" do
     end
 
     describe "with valid information" do
-      let(:new_orig_text)  { "NewExample" }
-      let(:new_trans_text) { "НовыйПример" }
+      let(:new_orig_text)  { "New Example" }
+      let(:new_trans_text) { "Новый Пример" }
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
@@ -87,8 +87,8 @@ describe "Card pages" do
     end
 
     describe "with invalid information" do
-      let(:new_orig_text)  { "NewExample" }
-      let(:new_trans_text) { "NewExample" }
+      let(:new_orig_text)  { "New Example" }
+      let(:new_trans_text) { "New Example" }
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
@@ -104,15 +104,56 @@ describe "Card pages" do
 
   describe "delete links" do
 
-    let(:card) { create(:card) }
-
     before do
+      create(:card)
       visit cards_path
     end
 
-    it { should have_link('delete', href: card_path(card)) }
+    it { should have_link('delete') }
     it "should be able to delete card" do
       expect{click_link('delete', match: :first)}.to change(Card, :count).by(-1)
+    end
+  end
+
+  describe "check card translation" do
+    let!(:card) { create(:card) }
+    let!(:second_card) { create(:card) }
+
+    before do
+      card.update_attributes(review_date: Date.today)
+      second_card.update_attributes(review_date: Date.today)
+      visit root_path
+    end
+
+    describe "with valid translation" do
+      before do
+        fill_in :user_text, with: card.original_text
+        click_button "Check"
+      end
+
+      it { expect(page).to have_content('Правильно!') }
+      it { expect(Card.can_be_reviewed.count).to eq(1) }
+    end
+
+    describe "with ivalid translation" do
+      before do
+        fill_in :user_text, with: "Invalid"
+        click_button "Check"
+      end
+
+      it { expect(page).to have_content('Неправильно!') }
+      it { expect(Card.can_be_reviewed.count).to eq(2) }
+    end
+
+    describe "when there are no cards to review" do
+      before do
+        Card.delete_all
+        visit root_path
+      end
+
+      it { expect(current_path).to eql(cards_path) }
+      it { expect(page).to have_content('Нет карточек для проверки!') }
+      it { expect(Card.can_be_reviewed.count).to eq(0) }
     end
   end
 end
