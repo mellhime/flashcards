@@ -144,5 +144,16 @@ describe "Card pages" do
       it { expect(page).to have_content('Неправильно!') }
       it { expect(Card.can_be_reviewed.count).to eq(2) }
     end
+
+    describe "when there are no cards to review" do
+      before do
+        Card.delete_all
+        visit root_path
+      end
+
+      it { expect(current_path).to eql(cards_path) }
+      it { expect(page).to have_content('Нет карточек для проверки!') }
+      it { expect(Card.can_be_reviewed.count).to eq(0) }
+    end
   end
 end
