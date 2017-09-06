@@ -132,8 +132,20 @@ describe "Card pages" do
         fill_in :user_text, with: card.original_text
         click_button "Check"
       end
-        
+
       it { expect(page).to have_content('Правильно!') }
+      it { expect(Card.can_be_reviewed.count).to eq(1) }
+    end
+
+    describe "with ivalid translation" do
+
+      before do
+        fill_in :user_text, with: "Invalid"
+        click_button "Check"
+      end
+      
+      it { expect(page).to have_content('Неправильно!') }
+      it { expect(Card.can_be_reviewed.count).to eq(2) }
     end
   end
 end
