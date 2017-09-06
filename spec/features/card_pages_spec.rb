@@ -116,18 +116,16 @@ describe "Card pages" do
   end
 
   describe "check card translation" do
-
-    let!(:card)  { create(:card)}
-    let!(:second_card) { create(:card)}  
+    let!(:card) { create(:card) }
+    let!(:second_card) { create(:card) }
 
     before do
       card.update_attributes(review_date: Date.today)
       second_card.update_attributes(review_date: Date.today)
       visit root_path
     end
-    
-    describe "with valid translation" do
 
+    describe "with valid translation" do
       before do
         fill_in :user_text, with: card.original_text
         click_button "Check"
@@ -138,12 +136,11 @@ describe "Card pages" do
     end
 
     describe "with ivalid translation" do
-
       before do
         fill_in :user_text, with: "Invalid"
         click_button "Check"
       end
-      
+
       it { expect(page).to have_content('Неправильно!') }
       it { expect(Card.can_be_reviewed.count).to eq(2) }
     end

@@ -51,7 +51,6 @@ describe Card do
   end
 
   describe "when review_date have been created" do
-    
     its(:review_date) { is_expected.not_to be_nil }
     its(:review_date) { is_expected.to eq(Date.today + 3.days) }
   end
