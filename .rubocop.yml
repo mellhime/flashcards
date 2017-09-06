@@ -23,3 +23,6 @@ Style/Documentation:
 
 Metrics/MethodLength:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
