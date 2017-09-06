@@ -38,10 +38,10 @@ class CardsController < ApplicationController
   end
 
   def random
-    unless @card = Card.can_be_reviewed.order("RANDOM()").first
-      flash[:danger] = "Нет карточек для проверки!"
-      redirect_to cards_path
-    end
+    @card = Card.can_be_reviewed.order("RANDOM()").first
+    return @card unless @card.nil?
+    flash[:danger] = "Нет карточек для проверки!"
+    redirect_to cards_path
   end
 
   def check
