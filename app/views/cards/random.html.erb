@@ -1,13 +1,13 @@
 <div class="col-xs-3">
-  <%= form_tag check_card_path(:id => @card.id) do |f| %>
   <h2>
     <%= @card.translated_text %>
   </h2>
+  <%= form_tag check_card_path(@card) do |f| %>
   <p>
     <%= text_field_tag :user_text %>
   </p>
   <p>
-    <%= submit_tag 'Check' %>
+    <%= button_tag 'Check' %>
   </p>
 <% end %>
 </div>
