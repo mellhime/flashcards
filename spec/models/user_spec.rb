@@ -64,7 +64,7 @@ describe User do
   end
 
   describe "when email address is already taken" do
-    let(:user2) { build(:user, email: user.email ) }
+    let(:user2) { build(:user, email: user.email) }
 
     it { expect(user2).not_to be_valid }
   end
