@@ -64,13 +64,9 @@ describe User do
   end
 
   describe "when email address is already taken" do
-    before do
-      user_with_same_email = user.dup
-      user_with_same_email.email = user.email
-      user_with_same_email.save
-    end
+    let(:user2) { build(:user, email: user.email ) }
 
-    it { should_not be_valid }
+    it { expect(user2).not_to be_valid }
   end
 
   describe "when password is not present" do

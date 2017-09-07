@@ -17,6 +17,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
+    @card.user_id = current_user.id
     if @card.save
       redirect_to @card
     else
@@ -63,5 +64,9 @@ class CardsController < ApplicationController
 
   def find_card
     @card = Card.find(params[:id])
+  end
+
+  def current_user
+    User.first
   end
 end

@@ -7,7 +7,6 @@ class Card < ApplicationRecord
   validates :translated_text, presence: true, length: { maximum: 35 }, format: { with: VALID_TRANSLATED_TEXT_REGEX }
   validate :equality_of_original_and_translated_texts
   validates :review_date, presence: true
-  validates :user_id, presence: true
 
   def create_review_date
     self.review_date = Date.today + 3.days
