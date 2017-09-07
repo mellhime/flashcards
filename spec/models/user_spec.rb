@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe User do
-
   let(:user) { create(:user) }
 
   after(:all) { User.delete_all }
@@ -106,7 +105,6 @@ describe User do
   end
 
   describe "card associations" do
-
     before { user.save }
     let!(:first_card)  { create(:card, user: user) }
     let!(:second_card) { create(:card, user: user) }

@@ -8,6 +8,7 @@ AllCops:
     - 'lib/anycable/rpc/**/*'
     - 'Rakefile'
     - 'Gemfile'
+    - "db/schema.rb"
   DisplayCopNames: true
   StyleGuideCopsOnly: false
   TargetRubyVersion: 2.4.1
