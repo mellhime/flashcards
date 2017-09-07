@@ -2,12 +2,18 @@ require 'rails_helper'
 
 describe Card do
 
-  let(:card) { create(:card) }
+  let(:user) { create(:user) }
+  let(:card) { create(:card, user_id: user.id) }
+
   subject { card }
 
   it { should respond_to(:original_text) }
   it { should respond_to(:translated_text) }
   it { should respond_to(:review_date) }
+  it { should respond_to(:user_id) }
+  it { should respond_to(:user) }
+  its(:user) { should eq user }
+
   it { should be_valid }
 
   describe "when original_text is not present" do
@@ -66,5 +72,10 @@ describe Card do
       card.update_attributes(review_date: Date.today - 2.days)
       Card.can_be_reviewed.should include(card)
     end
+  end
+
+  describe "when user_id is not present" do
+    before { card.user_id = nil }
+    it { should_not be_valid }
   end
 end

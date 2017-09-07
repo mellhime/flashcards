@@ -40,9 +40,7 @@ describe "Card pages" do
   end
 
   describe "new card page" do
-
     before { visit new_card_path }
-
     let(:submit) { "Create Card" }
 
     describe "with invalid information" do
