@@ -1,0 +1,17 @@
+<% provide(:title, "#{@user.name}") %>
+<p>
+  <strong>name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>email:</strong>
+  <%= @user.email %>
+</p>
+      <ul class="list-inline">
+        <li>
+          <%= link_to "edit", edit_user_path(@user) %>
+        <li>
+        <li><%= link_to "delete", user_path(@user), method: :delete, data: { confirm:
+          "You sure?" } %></li>
+      </ul>

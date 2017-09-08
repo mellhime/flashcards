@@ -28,6 +28,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'simple_form'
 gem 'bcrypt'
+gem 'sorcery'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
