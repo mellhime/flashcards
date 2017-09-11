@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
+  skip_before_action :require_login, only: [:index]
 
   def index
     @cards = Card.paginate(page: params[:page])

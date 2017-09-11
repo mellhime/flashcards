@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   resources :users
   resources :user_sessions
 
-  get 'login' => 'user_sessions#new', :as => :login
-  delete 'logout' => 'user_sessions#destroy', :as => :logout
+  match '/login',    to: 'user_sessions#new', via: 'get'
+  match '/logout',   to: 'user_sessions#destroy',     via: 'delete'
 end
