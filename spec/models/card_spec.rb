@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Card do
-
   let(:user) { create(:user) }
   let(:card) { create(:card, user_id: user.id) }
 
@@ -51,7 +50,7 @@ describe Card do
     end
   end
 
-  describe "when translated_text equal to original_text" do 
+  describe "when translated_text equal to original_text" do
     before { card.original_text = card.translated_text }
     it { should_not be_valid }
   end

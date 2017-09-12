@@ -1,8 +1,6 @@
 <% provide(:title, 'Все карточки') %>
   <h1>Все карточки</h1>
 
-  <%= will_paginate %>
-
   <ul class="list-group-item" ss="list-group">
     <% @cards.each do |card| %>
       <li class="list-group-item">
@@ -23,5 +21,3 @@
       </ul>
     <% end %>
 </ul>
-
-<%= will_paginate %>

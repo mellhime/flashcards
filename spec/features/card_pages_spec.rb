@@ -4,10 +4,16 @@ describe "Card pages" do
 
   subject { page }
 
+  let(:user) { create(:user) }
+  let(:valid_password) { 'foobar' }
+  after(:all) { User.delete_all }
+
   describe "index" do
+
     before do
-      create(:card, original_text: "Example", translated_text: "Пример")
-      create(:card, original_text: "NewExample", translated_text: "НовыйПример")
+      create(:card, original_text: "Example", translated_text: "Пример", user_id: user.id)
+      create(:card, original_text: "NewExample", translated_text: "НовыйПример", user_id: user.id)
+      login_user(user.email, valid_password)
       visit cards_path
     end
 
@@ -17,30 +23,28 @@ describe "Card pages" do
     it { should have_link('show') }
     it { should have_link('delete') }
 
-    describe "pagination" do
-
-      before(:all) { 30.times { create(:card) } }
-      after(:all)  { Card.delete_all }
-
-      it { should have_selector('div.pagination') }
-
-      it "should list each card" do
-        Card.paginate(page: 1).each do |card|
-          expect(page).to have_selector('li', text: card.original_text)
-        end
+    it "should list each card" do
+      Card.all.each do |card|
+        expect(page).to have_selector('li', text: card.original_text)
       end
     end
   end
 
   describe "card page" do
-    before { visit card_path(card) }
-    let(:card) { create(:card) }
+    before do
+      login_user(user.email, valid_password)
+      visit card_path(card)
+    end
+    let(:card) { create(:card, user_id: user.id) }
     it { should have_content(card.original_text) }
     it { should have_title(card.original_text) }
   end
 
   describe "new card page" do
-    before { visit new_card_path }
+    before do
+      login_user(user.email, valid_password)
+      visit new_card_path
+    end
     let(:submit) { "Create Card" }
 
     describe "with invalid information" do
@@ -62,8 +66,11 @@ describe "Card pages" do
   end
 
   describe "edit card page" do
-    let(:card) { create(:card) }
-    before { visit edit_card_path(card) }
+    let(:card) { create(:card, user_id: user.id) }
+    before do
+      login_user(user.email, valid_password)
+      visit edit_card_path(card)
+    end
 
     describe "page" do
       it { should have_content("Редактирование") }
@@ -101,7 +108,8 @@ describe "Card pages" do
 
   describe "delete links" do
     before do
-      create(:card)
+      create(:card, user_id: user.id)
+      login_user(user.email, valid_password)
       visit cards_path
     end
 
@@ -112,12 +120,13 @@ describe "Card pages" do
   end
 
   describe "check card translation" do
-    let!(:card) { create(:card) }
-    let!(:second_card) { create(:card) }
+    let!(:card) { create(:card, user_id: user.id) }
+    let!(:second_card) { create(:card, user_id: user.id) }
 
     before do
       card.update_attributes(review_date: Date.today)
       second_card.update_attributes(review_date: Date.today)
+      login_user(user.email, valid_password)
       visit root_path
     end
 

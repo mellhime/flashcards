@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Welcome to the Flashcarder"
+      auto_login(@user)
       redirect_to @user
     else
       render 'new'
@@ -24,11 +25,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update_attributes(user_params)
       flash[:success] = "Successfully updated"
       redirect_to @user
