@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "User pages" do
-
   subject { page }
 
   describe "index" do
@@ -42,7 +41,6 @@ describe "User pages" do
   end
 
   describe "signup page" do
-
     before { visit new_user_path }
 
     let(:submit) { "Create User" }
@@ -72,7 +70,7 @@ describe "User pages" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
 
-       describe "after saving the user" do
+      describe "after saving the user" do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
@@ -86,7 +84,7 @@ describe "User pages" do
   describe "edit" do
     let(:user) { create(:user) }
     let(:valid_password) { 'foobar' }
-    let(:invalid_password) { 'barfoo'}
+    let(:invalid_password) { 'barfoo' }
 
     before do
       login_user(user.email, valid_password)

@@ -58,6 +58,6 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.include FactoryGirl::Syntax::Methods
   config.include TestHelpers::Features, type: :feature
-  #config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
-  #config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
+  # config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
+  # config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
 end

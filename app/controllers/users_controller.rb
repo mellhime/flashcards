@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:index, :new, :create]
+  skip_before_action :require_login, only: %i(index new create)
+  before_action :find_user, only: %i(show destroy)
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -39,7 +39,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     render 'index'
   end
@@ -48,5 +47,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

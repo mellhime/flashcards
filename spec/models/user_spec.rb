@@ -67,12 +67,12 @@ describe User do
   end
 
   describe "when password is not present" do
-    let(:user) { build(:user, password: "")}
+    let(:user) { build(:user, password: "") }
     it { expect(user).not_to be_valid }
   end
 
   describe "when password doesn't match confirmation" do
-    let(:user) { build(:user, password_confirmation: "mismatch")}
+    let(:user) { build(:user, password_confirmation: "mismatch") }
     it { expect(user).not_to be_valid }
   end
 

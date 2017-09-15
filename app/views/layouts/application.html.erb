@@ -35,6 +35,12 @@
         <li>
           <%= link_to "Login", login_path  %>
         </li>
+        <li>
+        <%= link_to 'Login using Github', auth_at_provider_path(provider: :github) %>
+        </li>
+        <li>
+        <%= link_to 'unlink from Github', delete_oauth_path('github'), method: :delete %>
+        </li>
         <% end %>
       </ul>
     </header>

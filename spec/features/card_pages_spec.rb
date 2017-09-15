@@ -9,7 +9,6 @@ describe "Card pages" do
   after(:all) { User.delete_all }
 
   describe "index" do
-
     before do
       create(:card, original_text: "Example", translated_text: "Пример", user_id: user.id)
       create(:card, original_text: "NewExample", translated_text: "НовыйПример", user_id: user.id)

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Authentication" do
-
   let(:user) { create(:user) }
   let(:valid_password) { 'foobar' }
 
@@ -56,7 +55,6 @@ describe "Authentication" do
       end
 
       describe "after login" do
-
         it "should render the desired protected page" do
           expect(page).to have_title('Редактирование юзера')
         end

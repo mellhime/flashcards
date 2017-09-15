@@ -7,15 +7,15 @@ Rails.application.config.sorcery.submodules = [:external]
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
 
-  #config.external_providers = [:twitter]
+  config.external_providers = [:github]
 
-#add this file to .gitignore BEFORE putting any secret keys in here, or use a system like Figaro to abstract it!!! 
-      
+  # add this file to .gitignore BEFORE putting any secret keys in here, or use a system like Figaro to abstract it!!! 
+
   # config.twitter.key = " NmdwqjF74EpQXAF7l0gSA28aM"
   # config.twitter.secret = "omOoBZY2rQXjaixSmApUSDhdTaMHczXObggroYHcpX4mEgOVMi"
   # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
   # config.twitter.user_info_mapping = {:username => "screen_name"}
-      
+
   # -- core --
   # What controller action to call for non-authenticated users. You can also
   # override the 'not_authenticated' method of course.
@@ -122,12 +122,12 @@ Rails.application.config.sorcery.configure do |config|
   # config.facebook.api_version = "v2.3"
   # config.facebook.parse = :json
   #
-  # config.github.key = ""
-  # config.github.secret = ""
-  # config.github.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=github"
-  # config.github.user_info_mapping = {:email => "name"}
-  # config.github.scope = ""
-  #
+  # configure github using secrets (Rails 4.1, use environment variables in previous versions)
+  config.github.key = "#{Rails.application.secrets.sorcery_github_key}"
+  config.github.secret = "#{Rails.application.secrets.sorcery_github_secret}"
+  config.github.callback_url = "#{Rails.application.secrets.sorcery_github_callback_url}"
+  config.github.user_info_mapping = {:email => "name"}
+
   # config.paypal.key = ""
   # config.paypal.secret = ""
   # config.paypal.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=paypal"
@@ -436,7 +436,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-    # user.authentications_class =
+    user.authentications_class = Authentication
 
     # User's identifier in authentications class.
     # Default: `:user_id`
