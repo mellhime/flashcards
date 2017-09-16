@@ -9,6 +9,7 @@ AllCops:
     - 'Rakefile'
     - 'Gemfile'
     - 'db/schema.rb'
+    - 'config/initializers/sorcery.rb'
   DisplayCopNames: true
   StyleGuideCopsOnly: false
   TargetRubyVersion: 2.4.1

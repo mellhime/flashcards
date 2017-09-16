@@ -15,9 +15,11 @@ class OauthsController < ApplicationController
         @user = create_from(provider)
         reset_session
         auto_login(@user)
-        redirect_to users_path, :notice => "Logged in from #{provider.titleize}!"
+        flash[:notice] = "Logged in from #{provider.titleize}!"
+        redirect_to users_path
       rescue
-        redirect_to users_path, :alert => "Failed to login from #{provider.titleize}!"
+        flash[:alert] = "Failed to login from #{provider.titleize}!"
+        redirect_to users_path
       end
     end
   end
