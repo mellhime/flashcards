@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i(index new create)
-  before_action :find_user, only: %i(show destroy)
+  skip_before_action :require_login, only: [:index, :new, :create]
+  before_action :find_user, only: [:show, :destroy]
 
-  def show
-  end
+  def show; end
 
   def new
     @user = User.new
@@ -40,7 +39,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    render 'index'
+    redirect_to users_path
   end
 
   private

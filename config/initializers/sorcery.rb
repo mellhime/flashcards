@@ -7,7 +7,7 @@ Rails.application.config.sorcery.submodules = [:external]
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
 
-  config.external_providers = [:github]
+  config.external_providers = [:github, :twitter, :vk, :google]
 
   # add this file to .gitignore BEFORE putting any secret keys in here, or use a system like Figaro to abstract it!!! 
 
@@ -108,9 +108,9 @@ Rails.application.config.sorcery.configure do |config|
   # Twitter will not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
   #
-  # config.twitter.key = ""
-  # config.twitter.secret = ""
-  # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
+  # config.twitter.key = "#{Rails.application.secrets.sorcery_twitter_key}"
+  # config.twitter.secret = "#{Rails.application.secrets.sorcery_twitter_secret}"
+  # config.twitter.callback_url = "#{Rails.application.secrets.sorcery_twitter_callback_url}"
   # config.twitter.user_info_mapping = {:email => "screen_name"}
   #
   # config.facebook.key = ""
@@ -123,10 +123,10 @@ Rails.application.config.sorcery.configure do |config|
   # config.facebook.parse = :json
   #
   # configure github using secrets (Rails 4.1, use environment variables in previous versions)
-  config.github.key = "#{Rails.application.secrets.sorcery_github_key}"
-  config.github.secret = "#{Rails.application.secrets.sorcery_github_secret}"
-  config.github.callback_url = "#{Rails.application.secrets.sorcery_github_callback_url}"
-  config.github.user_info_mapping = {:email => "name"}
+  # config.github.key = "#{Rails.application.secrets.sorcery_github_key}"
+  # config.github.secret = "#{Rails.application.secrets.sorcery_github_secret}"
+  # config.github.callback_url = "#{Rails.application.secrets.sorcery_github_callback_url}"
+  # config.github.user_info_mapping = {:email => "login"}
 
   # config.paypal.key = ""
   # config.paypal.secret = ""
@@ -137,11 +137,11 @@ Rails.application.config.sorcery.configure do |config|
   # config.wechat.secret = ""
   # config.wechat.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=wechat"
   #
-  # config.google.key = ""
-  # config.google.secret = ""
-  # config.google.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=google"
-  # config.google.user_info_mapping = {:email => "email", :username => "name"}
-  # config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+  config.google.key = "#{Rails.application.secrets.sorcery_google_key}"
+  config.google.secret = "#{Rails.application.secrets.sorcery_google_secret}"
+  config.google.callback_url = "#{Rails.application.secrets.sorcery_google_callback_url}"
+  config.google.user_info_mapping = {:email => "email", :name => "name"}
+  config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters", see: https://docs.microsoft.com/en-us/azure/active-directory/active-directory-v2-limitations#restrictions-on-redirect-uris
@@ -153,10 +153,10 @@ Rails.application.config.sorcery.configure do |config|
   # config.microsoft.user_info_mapping = {:email => "userPrincipalName", :username => "displayName"}
   # config.microsoft.scope = "openid email https://graph.microsoft.com/User.Read"
   #
-  # config.vk.key = ""
-  # config.vk.secret = ""
-  # config.vk.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=vk"
-  # config.vk.user_info_mapping = {:login => "domain", :name => "full_name"}
+  config.vk.key = "#{Rails.application.secrets.sorcery_vk_key}"
+  config.vk.secret = "#{Rails.application.secrets.sorcery_vk_secret}"
+  config.vk.callback_url = "#{Rails.application.secrets.sorcery_vk_callback_url}"
+  config.vk.user_info_mapping = {:name => "full_name", :email => "email"}
   #
   # config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
   # config.slack.key = ''
