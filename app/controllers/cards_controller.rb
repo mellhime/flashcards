@@ -13,7 +13,7 @@ class CardsController < ApplicationController
   end
 
   def edit
-    redirect_to cards_path unless current_user.cards.include?(@card) 
+    redirect_to cards_path unless current_user.cards.include?(@card)
   end
 
   def create

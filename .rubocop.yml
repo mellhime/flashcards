@@ -34,3 +34,6 @@ Metrics/BlockLength:
 
 Style/SymbolArray:
   Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
