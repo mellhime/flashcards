@@ -1,23 +1,31 @@
 <% provide(:title, 'Все карточки') %>
   <h1>Все карточки</h1>
 
-  <ul class="list-group-item" ss="list-group">
-    <% @cards.each do |card| %>
-      <li class="list-group-item">
-        <%= card.original_text %>
-        <%= card.translated_text %>
-      </li>
-      <li class="list-group-item">
-        <%= card.review_date.strftime("%d/%m/%Y") %>
-      </li>
-      <ul class="list-inline">
-        <li>
-          <%= link_to "show", card_path(card) %></li>
-        <li>
-          <%= link_to "edit", edit_card_path(card) %>
-        <li>
-        <li><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
-          "You sure?" } %></li>
-      </ul>
-    <% end %>
-</ul>
+  <table class="table table-striped">
+    <caption>Все карточки</caption>
+
+    <thead>
+      <tr>
+        <th>Слово</th>
+        <th>Перевод</th>
+        <th>Дата проверки</th>
+        <th>Перейти</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @cards.each do |card| %>
+        <tr>
+          <td><%= card.original_text %></td>
+          <td><%= card.translated_text %></td>
+          <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+          <td><%= link_to "show", card_path(card) %></td>
+          <td><%= link_to "edit", edit_card_path(card) %></td>
+          <td><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
+            "You sure?" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

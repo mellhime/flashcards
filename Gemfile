@@ -53,7 +53,6 @@ group :development, :test do
   gem 'rake'
   gem 'rspec-its'
   gem 'pry'
-  gem 'rails-controller-testing'
 end
 
 group :development do
