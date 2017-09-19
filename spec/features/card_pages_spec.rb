@@ -24,7 +24,7 @@ describe "Card pages" do
 
     it "should list each card" do
       Card.all.each do |card|
-        expect(page).to have_selector('li', text: card.original_text)
+        expect(page).to have_selector('td', text: card.original_text)
       end
     end
   end
