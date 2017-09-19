@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
 
   def index
-    @cards = Card.paginate(page: params[:page])
+    @cards = current_user.cards
   end
 
   def show
@@ -13,6 +13,7 @@ class CardsController < ApplicationController
   end
 
   def edit
+    redirect_to cards_path unless current_user.cards.include?(@card)
   end
 
   def create
@@ -38,7 +39,7 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = Card.can_be_reviewed.order("RANDOM()").first
+    @card = current_user.cards.can_be_reviewed.order("RANDOM()").first
     return @card unless @card.nil?
     flash[:danger] = "Нет карточек для проверки!"
     redirect_to cards_path
@@ -63,9 +64,5 @@ class CardsController < ApplicationController
 
   def find_card
     @card = Card.find(params[:id])
-  end
-
-  def current_user
-    User.first
   end
 end

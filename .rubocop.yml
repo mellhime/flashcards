@@ -9,6 +9,7 @@ AllCops:
     - 'Rakefile'
     - 'Gemfile'
     - 'db/schema.rb'
+    - 'config/initializers/**/*'
   DisplayCopNames: true
   StyleGuideCopsOnly: false
   TargetRubyVersion: 2.4.1
@@ -29,4 +30,10 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/BlockLength:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Metrics/AbcSize:
   Enabled: false
