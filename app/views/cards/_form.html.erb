@@ -1,5 +1,5 @@
 <div class="col-xs-3">
-  <%= simple_form_for @card do |f| %>
+  <%= simple_form_for @card, html: { multipart: true } do |f| %>
     <% if @card.errors.any? %>
       <div id="error_explanation">
         <h2>
@@ -16,7 +16,7 @@
   <p><%= f.input :original_text, hint: 'in English' %></p>
   <p><%= f.input :translated_text, hint: 'in Russian' %></p>
   <p><%= f.input :avatar, as: :file %></p>
-  <p><%= f.input :avatar_from_url, label: "Enter a URL" %></p>
+  <p><%= f.input :avatar_remote_url, label: "Enter a URL" %></p>
   <p><%= f.button :submit, class: "btn btn-large btn-primary"%></p>
   <% end %>
 </div>
