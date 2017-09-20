@@ -13,14 +13,10 @@
         </ul>
       </div>
     <% end %>
-  <p>
-    <%= f.input :original_text, hint: 'in English' %>
-  </p>
-  <p>
-    <%= f.input :translated_text, hint: 'in Russian' %>
-  </p>
-  <p>
-    <%= f.button :submit, class: "btn btn-large btn-primary"%>
-  </p>
+  <p><%= f.input :original_text, hint: 'in English' %></p>
+  <p><%= f.input :translated_text, hint: 'in Russian' %></p>
+  <p><%= f.input :avatar, as: :file %></p>
+  <p><%= f.input :avatar_from_url, label: "Enter a URL" %></p>
+  <p><%= f.button :submit, class: "btn btn-large btn-primary"%></p>
   <% end %>
 </div>

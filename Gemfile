@@ -30,6 +30,8 @@ gem 'simple_form'
 gem 'bcrypt'
 gem 'sorcery'
 gem 'figaro'
+gem 'paperclip'
+gem 'aws-sdk', '2.10.42'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

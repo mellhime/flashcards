@@ -37,6 +37,7 @@ describe "Card pages" do
     let(:card) { create(:card, user_id: user.id) }
     it { should have_content(card.original_text) }
     it { should have_title(card.original_text) }
+    it { should have_css('img') }
   end
 
   describe "new card page" do
@@ -61,6 +62,17 @@ describe "Card pages" do
       it "should create a card" do
         expect { click_button submit }.to change(Card, :count).by(1)
       end
+    end
+
+    describe "when avatar uploaded via URL" do
+      before do
+        fill_in "Original text", with: "Example"
+        fill_in "Translated text", with: "Пример"
+        fill_in "Enter a URL", with: "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+        click_button submit
+      end
+
+      it { expect(page).to have_css('img') }
     end
   end
 

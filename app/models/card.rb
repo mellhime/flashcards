@@ -17,4 +17,11 @@ class Card < ApplicationRecord
   end
 
   scope :can_be_reviewed, -> { where('DATE(review_date) <= ?', Date.today)}
+  has_attached_file :avatar, styles: { thumb: ["360x360>", :jpeg] }
+  validates_attachment :avatar, content_type: { content_type: /\Aimage\/.*\z/ }
+
+  def avatar_from_url=(url_value)
+    self.avatar = URI.parse(url_value) unless url_value.blank?
+    super
+  end
 end

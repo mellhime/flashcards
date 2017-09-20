@@ -12,6 +12,7 @@ describe Card do
   it { should respond_to(:user_id) }
   it { should respond_to(:user) }
   its(:user) { should eq user }
+  it { should respond_to(:avatar) }
 
   it { should be_valid }
 
@@ -76,5 +77,12 @@ describe Card do
   describe "when user_id is not present" do
     before { card.user_id = nil }
     it { should_not be_valid }
+  end
+
+  describe "when avatar uploaded" do
+    before { card.update_attributes(avatar: File.new("#{Rails.root}/spec/support/fixtures/image.jpg")) }
+    
+    its(:avatar) { is_expected.not_to be_nil }
+    its(:avatar_content_type) { is_expected.to eq("image/jpeg") }
   end
 end

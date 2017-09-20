@@ -8,3 +8,8 @@
   <strong>translated_text:</strong>
   <%= @card.translated_text %>
 </p>
+
+<p>
+  <strong>image:</strong>
+  <%= image_tag(@card.avatar.url(:thumb)) if @card.avatar.exists? %>
+</p>
