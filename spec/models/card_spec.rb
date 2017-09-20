@@ -81,7 +81,7 @@ describe Card do
 
   describe "when avatar uploaded" do
     before { card.update_attributes(avatar: File.new("#{Rails.root}/spec/support/fixtures/image.jpg")) }
-    
+
     its(:avatar) { is_expected.not_to be_nil }
     its(:avatar_content_type) { is_expected.to eq("image/jpeg") }
   end
