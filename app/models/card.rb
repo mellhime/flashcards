@@ -8,11 +8,10 @@ class Card < ApplicationRecord
   validate :equality_of_original_and_translated_texts
   validates :review_date, presence: true
 
-  scope :can_be_reviewed, -> { where('DATE(review_date) <= ?', Date.today)}
+  scope :can_be_reviewed, -> { where('DATE(review_date) <= ?', Date.today) }
   has_attached_file :avatar, styles: { thumb: ["360x360>", :jpeg] }
   validates_attachment :avatar, content_type: { content_type: %r{\Aimage\/.*\z} }
-  #validates :avatar_remote_url, :url => true
-  #validates :avatar_remote_url, :format => URI::regexp(%w(http https))
+  validates_attachment :avatar_remote_url, url: :true
 
   def create_review_date
     self.review_date = Date.today + 3.days
@@ -22,8 +21,11 @@ class Card < ApplicationRecord
     errors.add(:translated_text, "can't be the same as original") if original_text.downcase == translated_text.downcase
   end
 
-  def avatar_remote_url=(url_value) 
-    self.avatar = URI.parse(url_value).to_s unless url_value.blank?
-    super
+  def avatar_remote_url=(url_value)
+    begin
+      self.avatar = URI.parse(url_value).to_s unless url_value.blank?
+      super
+    rescue Exception
+    end
   end
 end
