@@ -1,4 +1,5 @@
 class Card < ApplicationRecord
+  attr_accessor :my_errors
   belongs_to :user
   before_validation :create_review_date, on: :create
   VALID_ORIGINAL_TEXT_REGEX = /\A[A-z]+\z/
@@ -22,10 +23,9 @@ class Card < ApplicationRecord
   end
 
   def avatar_remote_url=(url_value)
-    begin
       self.avatar = URI.parse(url_value).to_s unless url_value.blank?
       super
-    rescue Exception
-    end
+    rescue
+      self.my_errors = "whatever"
   end
 end
