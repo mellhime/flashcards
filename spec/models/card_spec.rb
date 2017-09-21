@@ -79,10 +79,36 @@ describe Card do
     it { should_not be_valid }
   end
 
-  describe "when avatar uploaded" do
+  describe "when avatar uploaded via file" do
     before { card.update_attributes(avatar: File.new("#{Rails.root}/spec/support/fixtures/image.jpg")) }
 
     its(:avatar) { is_expected.not_to be_nil }
     its(:avatar_content_type) { is_expected.to eq("image/jpeg") }
+  end
+
+  describe "when avatar uploaded via URL" do
+    let (:valid_url) { "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
+    let (:invalid_url) { "htps://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
+
+    before { card.update_attributes(avatar: nil) }
+
+    describe "URL is valid" do
+      before { card.avatar_remote_url = valid_url }
+
+      its(:avatar_remote_url) { is_expected.not_to be_nil }
+      its(:avatar_remote_url) { is_expected.to be_kind_of(String) }
+      its(:avatar) { is_expected.not_to be_nil }
+      its(:avatar_content_type) { is_expected.to eq("image/png") }
+    end
+
+    before { card.update_attributes(avatar: nil) }
+
+    describe "URL is invalid" do
+      before { card.avatar_remote_url = invalid_url }
+
+      its(:avatar_remote_url) { is_expected.to be_nil }
+      its(:avatar_file_name) { is_expected.to be_nil }
+      its(:avatar_file_size) { is_expected.to be_nil }
+    end
   end
 end

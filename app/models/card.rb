@@ -12,7 +12,7 @@ class Card < ApplicationRecord
   scope :can_be_reviewed, -> { where('DATE(review_date) <= ?', Date.today) }
   has_attached_file :avatar, styles: { thumb: ["360x360>", :jpeg] }
   validates_attachment :avatar, content_type: { content_type: %r{\Aimage\/.*\z} }
-  validates_attachment :avatar_remote_url, url: :true
+  validates_attachment :avatar_remote_url, :allow_blank => true, url: :true
 
   def create_review_date
     self.review_date = Date.today + 3.days
@@ -27,7 +27,7 @@ class Card < ApplicationRecord
       self.avatar = URI.parse(url_value).to_s unless url_value.blank?
       super
     rescue
-      self.my_errors = "whatever"
+      self.errors.add(:avatar_remote_url, "is invalid")
     end
   end
 end

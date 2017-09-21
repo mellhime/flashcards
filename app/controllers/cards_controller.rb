@@ -18,9 +18,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params.merge(user_id: current_user.id))
-
-    if !@card.my_errors.nil?
-      flash.now[:danger] = "URL is invalid!"
+    if !@card.errors.empty?
       render 'new'
     elsif @card.save
       redirect_to @card
