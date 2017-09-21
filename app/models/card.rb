@@ -26,6 +26,6 @@ class Card < ApplicationRecord
     self.avatar = URI.parse(url_value).to_s unless url_value.blank?
     super
     rescue Paperclip::AdapterRegistry::NoHandlerError
-      self.errors.add(:avatar_remote_url, "is invalid")
+    errors.add(:avatar_remote_url, "is invalid")
   end
 end
