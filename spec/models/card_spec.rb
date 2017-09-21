@@ -87,8 +87,8 @@ describe Card do
   end
 
   describe "when avatar uploaded via URL" do
-    let (:valid_url) { "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
-    let (:invalid_url) { "htps://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
+    let(:valid_url) { "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
+    let(:invalid_url) { "htps://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
 
     before { card.update_attributes(avatar: nil) }
 
