@@ -101,14 +101,16 @@ describe Card do
       its(:avatar_content_type) { is_expected.to eq("image/png") }
     end
 
-    before { card.update_attributes(avatar: nil) }
-
     describe "URL is invalid" do
       before { card.avatar_remote_url = invalid_url }
 
       its(:avatar_remote_url) { is_expected.to be_nil }
       its(:avatar_file_name) { is_expected.to be_nil }
       its(:avatar_file_size) { is_expected.to be_nil }
+
+      it 'should add error' do
+        expect(card.errors.messages).to include(avatar_remote_url: ["is invalid"])
+      end
     end
   end
 end

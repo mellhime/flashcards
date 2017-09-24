@@ -18,13 +18,8 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params.merge(user_id: current_user.id))
-    if !@card.errors.empty?
-      render 'new'
-    elsif @card.save
-      redirect_to @card
-    else
-      render 'new'
-    end
+    render 'new' and return unless @card.errors.empty?
+    @card.save ? (redirect_to @card) : (render 'new')
   end
 
   def update
