@@ -18,7 +18,11 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params.merge(user_id: current_user.id))
-    @card.save ? (redirect_to @card) : (render 'new')
+    if @card.save
+      redirect_to @card
+    else
+      render 'new'
+    end
   end
 
   def update
@@ -55,7 +59,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_remote_url, :image_url)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url)
   end
 
   def find_card

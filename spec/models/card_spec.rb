@@ -95,8 +95,8 @@ describe Card do
     describe "URL is valid" do
       before { card.update_attributes(image_url: valid_url) }
 
-      its(:image_remote_url) { is_expected.not_to be_nil }
-      its(:image_remote_url) { is_expected.to be_kind_of(String) }
+      its(:image_url) { is_expected.not_to be_nil }
+      its(:image_url) { is_expected.to be_kind_of(String) }
       its(:image) { is_expected.not_to be_nil }
       its(:image_content_type) { is_expected.to eq("image/png") }
     end
@@ -104,9 +104,9 @@ describe Card do
     describe "URL is invalid" do
       before { card.update_attributes(image_url: invalid_url) }
 
-      its(:image_remote_url) { is_expected.to be_nil }
       its(:image_file_name) { is_expected.to be_nil }
       its(:image_file_size) { is_expected.to be_nil }
+      its(:image_content_type) { is_expected.to be_nil }
 
       it 'should add error' do
         expect(card.errors.messages).to include(image_url: ["is not a valid URL"])

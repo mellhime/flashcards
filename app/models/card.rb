@@ -29,6 +29,5 @@ class Card < ApplicationRecord
 
   def download_remote_image
     self.image = URI.parse(image_url).to_s
-    self.image_remote_url = image_url
   end
 end
