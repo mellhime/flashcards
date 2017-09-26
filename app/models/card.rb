@@ -1,7 +1,7 @@
 class Card < ApplicationRecord
   belongs_to :user
   before_validation :create_review_date, on: :create
-  before_save :download_remote_image, :if => :image_url_provided?
+  before_save :download_remote_image, if: :image_url_provided?
 
   VALID_ORIGINAL_TEXT_REGEX = /\A[A-z]+\z/
   validates :original_text, presence: true, length: { maximum: 35 }, format: { with: VALID_ORIGINAL_TEXT_REGEX }
@@ -13,7 +13,7 @@ class Card < ApplicationRecord
 
   has_attached_file :image, styles: { thumb: ["360x360>", :jpeg] }
   validates_attachment :image, content_type: { content_type: %r{\Aimage\/.*\z} }
-  validates :image_url, :url => {:allow_blank => true}
+  validates :image_url, url: { allow_blank: true }
 
   def create_review_date
     self.review_date = Date.today + 3.days
@@ -24,7 +24,7 @@ class Card < ApplicationRecord
   end
 
   def image_url_provided?
-    !self.image_url.blank?
+    !image_url.blank?
   end
 
   def download_remote_image
