@@ -12,7 +12,7 @@ describe Card do
   it { should respond_to(:user_id) }
   it { should respond_to(:user) }
   its(:user) { should eq user }
-  it { should respond_to(:avatar) }
+  it { should respond_to(:image) }
 
   it { should be_valid }
 
@@ -79,37 +79,37 @@ describe Card do
     it { should_not be_valid }
   end
 
-  describe "when avatar uploaded via file" do
-    before { card.update_attributes(avatar: File.new("#{Rails.root}/spec/support/fixtures/image.jpg")) }
+  describe "when image uploaded via file" do
+    before { card.update_attributes(image: File.new("#{Rails.root}/spec/support/fixtures/image.jpg")) }
 
-    its(:avatar) { is_expected.not_to be_nil }
-    its(:avatar_content_type) { is_expected.to eq("image/jpeg") }
+    its(:image) { is_expected.not_to be_nil }
+    its(:image_content_type) { is_expected.to eq("image/jpeg") }
   end
 
-  describe "when avatar uploaded via URL" do
+  describe "when image uploaded via URL" do
     let(:valid_url) { "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
     let(:invalid_url) { "htps://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" }
 
-    before { card.update_attributes(avatar: nil) }
+    before { card.update_attributes(image: nil) }
 
     describe "URL is valid" do
-      before { card.avatar_remote_url = valid_url }
+      before { card.update_attributes(image_url: valid_url) }
 
-      its(:avatar_remote_url) { is_expected.not_to be_nil }
-      its(:avatar_remote_url) { is_expected.to be_kind_of(String) }
-      its(:avatar) { is_expected.not_to be_nil }
-      its(:avatar_content_type) { is_expected.to eq("image/png") }
+      its(:image_remote_url) { is_expected.not_to be_nil }
+      its(:image_remote_url) { is_expected.to be_kind_of(String) }
+      its(:image) { is_expected.not_to be_nil }
+      its(:image_content_type) { is_expected.to eq("image/png") }
     end
 
     describe "URL is invalid" do
-      before { card.avatar_remote_url = invalid_url }
+      before { card.update_attributes(image_url: invalid_url) }
 
-      its(:avatar_remote_url) { is_expected.to be_nil }
-      its(:avatar_file_name) { is_expected.to be_nil }
-      its(:avatar_file_size) { is_expected.to be_nil }
+      its(:image_remote_url) { is_expected.to be_nil }
+      its(:image_file_name) { is_expected.to be_nil }
+      its(:image_file_size) { is_expected.to be_nil }
 
       it 'should add error' do
-        expect(card.errors.messages).to include(avatar_remote_url: ["is invalid"])
+        expect(card.errors.messages).to include(image_url: ["is not a valid URL"])
       end
     end
   end

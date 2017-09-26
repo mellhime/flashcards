@@ -11,5 +11,5 @@
 
 <p>
   <strong>image:</strong>
-  <%= image_tag(@card.avatar.url(:thumb)) if @card.avatar.exists? %>
+  <%= image_tag(@card.image.url(:thumb)) if @card.image.exists? %>
 </p>

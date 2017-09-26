@@ -64,7 +64,7 @@ describe "Card pages" do
       end
     end
 
-    describe "when avatar uploaded via URL" do
+    describe "when image uploaded via URL" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
@@ -75,11 +75,11 @@ describe "Card pages" do
       it { expect(page).to have_css('img') }
     end
 
-    describe "when avatar uploaded via file" do
+    describe "when image uploaded via file" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
-        attach_file :card_avatar, 'spec/support/fixtures/image.jpg'
+        attach_file :card_image, 'spec/support/fixtures/image.jpg'
         click_button submit
       end
 
