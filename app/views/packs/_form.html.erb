@@ -1,0 +1,20 @@
+<div class="col-xs-3">
+  <%= simple_form_for @pack, html: { multipart: true } do |f| %>
+    <% if @pack.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@pack.errors.count, "error") %>
+          prohibited this pack from being saved:
+        </h2>
+        <ul>
+          <% @pack.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <p><%= f.input :name %></p>
+  <p><%= f.input :current %></p>
+  <p><%= f.button :submit, class: "btn btn-large btn-primary"%></p>
+  <% end %>
+</div>

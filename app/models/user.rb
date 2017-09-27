@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :cards
+  has_many :packs
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end

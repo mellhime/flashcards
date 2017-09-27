@@ -90,4 +90,14 @@ describe User do
       expect(user.cards.to_a).to eq [first_card, second_card]
     end
   end
+
+  describe "pack associations" do
+    before { user.save }
+    let!(:first_pack)  { create(:pack, user: user) }
+    let!(:second_pack) { create(:pack, user: user) }
+
+    it "should have packs" do
+      expect(user.packs.to_a).to eq [first_pack, second_pack]
+    end
+  end
 end

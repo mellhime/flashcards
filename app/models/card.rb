@@ -1,5 +1,6 @@
 class Card < ApplicationRecord
   belongs_to :user
+  belongs_to :pack
   before_validation :create_review_date, on: :create
   before_save :download_remote_image, if: :image_url_provided?
 

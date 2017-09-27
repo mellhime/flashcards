@@ -15,6 +15,10 @@
     <% end %>
   <p><%= f.input :original_text, hint: 'in English' %></p>
   <p><%= f.input :translated_text, hint: 'in Russian' %></p>
+  <% unless current_user.packs.nil? %>
+    <p><%= f.select :pack, options_for_select(current_user.packs.map { |pack| [pack.name] }) %></p>
+  <% end %>
+  <p><%= link_to "Создать колоду", new_pack_path %><p>
   <p><%= f.input :image, as: :file %></p>
   <p><%= f.input :image_url, label: "Enter a URL" %></p>
   <p><%= f.button :submit, class: "btn btn-large btn-primary"%></p>

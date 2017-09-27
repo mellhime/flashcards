@@ -8,7 +8,7 @@ describe "Card pages" do
   let(:valid_password) { 'foobar' }
   after(:all) { User.delete_all }
 
-  describe "index" do
+  describe "index page" do
     before do
       create(:card, original_text: "Example", translated_text: "Пример", user_id: user.id)
       create(:card, original_text: "NewExample", translated_text: "НовыйПример", user_id: user.id)
@@ -29,7 +29,7 @@ describe "Card pages" do
     end
   end
 
-  describe "card page" do
+  describe "show page" do
     before do
       login_user(user.email, valid_password)
       visit card_path(card)
@@ -38,6 +38,7 @@ describe "Card pages" do
     it { should have_content(card.original_text) }
     it { should have_title(card.original_text) }
     it { should have_css('img') }
+    it { should have_content(card.pack.name) }
   end
 
   describe "new card page" do
@@ -45,6 +46,7 @@ describe "Card pages" do
       login_user(user.email, valid_password)
       visit new_card_path
     end
+
     let(:submit) { "Create Card" }
 
     describe "with invalid information" do
