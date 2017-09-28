@@ -47,6 +47,11 @@ describe "Card pages" do
       visit new_card_path
     end
 
+    describe "page" do
+      it { should have_link("Создать колоду") }
+      it { should have_field("Image") }
+    end
+
     let(:submit) { "Create Card" }
 
     describe "with invalid information" do
@@ -144,14 +149,25 @@ describe "Card pages" do
   end
 
   describe "check card translation" do
+
+    let!(:pack) { create(:pack, user_id: user.id) }
     let!(:card) { create(:card, user_id: user.id) }
-    let!(:second_card) { create(:card, user_id: user.id) }
+    let!(:card_from_current_pack) { create(:card, user_id: user.id, pack_id: pack.id) }
 
     before do
       card.update_attributes(review_date: Date.today)
-      second_card.update_attributes(review_date: Date.today)
+      card_from_current_pack.update_attributes(review_date: Date.today)
       login_user(user.email, valid_password)
       visit root_path
+    end
+
+    describe "check card not from current pack" do
+      it { expect(page).to have_content(card.translated_text) }
+      it { expect(page).to have_button('Check') }
+    end
+
+    describe "check card page from current pack" do
+      it { expect(page).to have_content(card_from_current_pack.translated_text) }
     end
 
     describe "with valid translation" do
@@ -176,7 +192,7 @@ describe "Card pages" do
 
     describe "when there are no cards to review" do
       before do
-        Card.delete_all
+        Card.can_be_reviewed.delete_all
         visit root_path
       end
 

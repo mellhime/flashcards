@@ -5,8 +5,7 @@ class CardsController < ApplicationController
     @cards = current_user.cards
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @card = Card.new
@@ -69,7 +68,7 @@ class CardsController < ApplicationController
   end
 
   def pack_by_name
-    current_user.packs.find_by(name: card_params[:pack]).nil? ? (Pack.new(name: card_params[:pack])) : (current_user.packs.find_by(name: card_params[:pack]))
+    current_user.packs.find_by(name: card_params[:pack]).nil? ? Pack.new(name: card_params[:pack]) : current_user.packs.find_by(name: card_params[:pack])
   end
 
   def choose_card
