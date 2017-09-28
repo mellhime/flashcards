@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Pack pages" do
-
   subject { page }
 
   let(:user) { create(:user) }
@@ -83,7 +82,7 @@ describe "Pack pages" do
     end
 
     describe "with valid information" do
-      let(:new_name)  { "NewExample" }
+      let(:new_name) { "NewExample" }
       let(:new_current) { true }
       before do
         fill_in "Name", with: new_name
@@ -97,7 +96,7 @@ describe "Pack pages" do
     end
 
     describe "with invalid information" do
-      let(:new_name)  { "" }
+      let(:new_name) { "" }
       let(:new_current) { true }
       before do
         fill_in "Name", with: new_name
@@ -106,7 +105,7 @@ describe "Pack pages" do
       end
 
       it { should have_content("error") }
-      it { expect(pack.reload.name).to eq pack.name}
+      it { expect(pack.reload.name).to eq pack.name }
       it { expect(pack.reload.current).to eq pack.current }
     end
   end
@@ -120,7 +119,7 @@ describe "Pack pages" do
 
       it { should have_link('delete') }
       it "should be able to delete pack" do
-        expect{click_link('delete', match: :first)}.to change(Pack, :count).by(-1)
+        expect { click_link('delete', match: :first) }.to change(Pack, :count).by(-1)
       end
     end
   end

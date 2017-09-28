@@ -149,7 +149,6 @@ describe "Card pages" do
   end
 
   describe "check card translation" do
-
     let!(:pack) { create(:pack, user_id: user.id) }
     let!(:card) { create(:card, user_id: user.id) }
     let!(:card_from_current_pack) { create(:card, user_id: user.id, pack_id: pack.id) }
