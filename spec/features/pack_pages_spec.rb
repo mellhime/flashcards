@@ -4,6 +4,7 @@ describe "Pack pages" do
   subject { page }
 
   let(:user) { create(:user) }
+  let(:pack) { create(:pack, user_id: user.id) }
   let(:valid_password) { 'foobar' }
   after(:all) { User.delete_all }
 
@@ -36,7 +37,6 @@ describe "Pack pages" do
     let(:pack) { create(:pack, user_id: user.id) }
     it { should have_content(pack.name) }
     it { should have_title(pack.name) }
-    it { should have_content(pack.current) }
   end
 
   describe "new pack page" do
@@ -61,7 +61,7 @@ describe "Pack pages" do
     describe "with valid information" do
       before do
         fill_in "Name", with: "Example"
-        find(:css, "#pack_current").set(true)
+        find(:css, "#pack_current").set(1)
       end
 
       it "should create a pack" do
@@ -71,7 +71,6 @@ describe "Pack pages" do
   end
 
   describe "edit pack page" do
-    let(:pack) { create(:pack, user_id: user.id) }
     before do
       login_user(user.email, valid_password)
       visit edit_pack_path(pack)
@@ -82,9 +81,9 @@ describe "Pack pages" do
       it { should have_title("Редактирование") }
     end
 
-    describe "with valid information" do
+    describe "with valid information and change the current pack" do
       let(:new_name) { "NewExample" }
-      let(:new_current) { true }
+      let(:new_current) { 1 }
       before do
         fill_in "Name", with: new_name
         find(:css, "#pack_current").set(new_current)
@@ -93,11 +92,12 @@ describe "Pack pages" do
 
       it { should have_title(new_name) }
       it { expect(pack.reload.name).to eq new_name }
+      it { expect(user.reload.current_pack).to eq(Pack.find_by(name: new_name).id) }
     end
 
     describe "with invalid information" do
       let(:new_name) { "" }
-      let(:new_current) { true }
+      let(:new_current) { 1 }
       before do
         fill_in "Name", with: new_name
         find(:css, "#pack_current").set(new_current)
@@ -106,7 +106,7 @@ describe "Pack pages" do
 
       it { should have_content("error") }
       it { expect(pack.reload.name).to eq pack.name }
-      it { expect(pack.reload.current).to eq pack.current }
+      it { expect(user.reload.current_pack).to be_nil }
     end
   end
 

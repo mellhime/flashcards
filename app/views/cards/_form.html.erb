@@ -16,7 +16,7 @@
   <p><%= f.input :original_text, hint: 'in English' %></p>
   <p><%= f.input :translated_text, hint: 'in Russian' %></p>
   <% unless current_user.packs.nil? %>
-    <p><%= f.select :pack, options_for_select(current_user.packs.map { |pack| [pack.name] }) %></p>
+    <p><%= f.select :pack, options_for_select(["one"]) %></p>
   <% end %>
   <p><%= link_to "Создать колоду", new_pack_path %><p>
   <p><%= f.input :image, as: :file %></p>
