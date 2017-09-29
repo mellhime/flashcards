@@ -72,10 +72,10 @@ class CardsController < ApplicationController
   end
 
   def choose_card
-    if current_user.current_pack.nil?
-      @card = current_user.cards.can_be_reviewed.random
-    else
-      @card = current_user.packs.find_by(id: current_user.current_pack).cards.can_be_reviewed.random
-    end
+    @card = if current_user.current_pack.nil?
+              current_user.cards.can_be_reviewed.random
+            else
+              current_user.packs.find_by(id: current_user.current_pack).cards.can_be_reviewed.random
+            end
   end
 end

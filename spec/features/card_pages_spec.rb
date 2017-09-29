@@ -64,7 +64,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
-        select pack.name, :from => "card[pack]"
+        select pack.name, from: "card[pack]"
       end
 
       it "should create a card" do
@@ -77,7 +77,7 @@ describe "Card pages" do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
         fill_in "Enter a URL", with: "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-        select pack.name, :from => "card[pack]"
+        select pack.name, from: "card[pack]"
         click_button submit
       end
 
@@ -88,7 +88,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
-        select "pack.name", :from => "card[pack]"
+        select "pack.name", from: "card[pack]"
         attach_file :card_image, 'spec/support/fixtures/image.jpg'
         click_button submit
       end
@@ -115,7 +115,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
-        select pack.name, :from => "card[pack]"
+        select pack.name, from: "card[pack]"
         click_button "Update Card"
       end
 
@@ -130,7 +130,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
-        select pack.name, :from => "card[pack]"
+        select pack.name, from: "card[pack]"
         click_button "Update Card"
       end
 
