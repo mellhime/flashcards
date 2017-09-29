@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Card pages" do
-
   subject { page }
 
   let(:user) { create(:user) }
@@ -61,9 +60,22 @@ describe "Card pages" do
     end
 
     describe "with valid information" do
+
+      let(:pack) { create(:pack, user_id: user.id) }
+
       before do
+        pack.save
+        user.packs << pack
+        user.save
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
+        #binding.pry
+        #select pack.name, :from => "card[pack]"
+      end
+
+      #it { should have_content("Verbs") }
+      it "should create a card" do
+        expect (user.packs.first.name).to eq("Verbs")
       end
 
       it "should create a card" do

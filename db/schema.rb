@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 20170926152151) do
   end
 
   create_table "packs", force: :cascade do |t|
-    t.boolean "current"
     t.string "name"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_packs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170926152151) do
     t.datetime "updated_at", null: false
     t.string "salt"
     t.string "crypted_password"
+    t.integer "current_pack"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

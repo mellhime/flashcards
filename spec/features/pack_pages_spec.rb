@@ -68,6 +68,7 @@ describe "Pack pages" do
         expect { click_button submit }.to change(Pack, :count).by(1)
       end
     end
+  end
 
   describe "edit pack page" do
     let(:pack) { create(:pack, user_id: user.id) }
@@ -92,7 +93,6 @@ describe "Pack pages" do
 
       it { should have_title(new_name) }
       it { expect(pack.reload.name).to eq new_name }
-      it { expect(pack.reload.current).to eq new_current }
     end
 
     describe "with invalid information" do
@@ -110,17 +110,16 @@ describe "Pack pages" do
     end
   end
 
-    describe "delete links" do
-      before do
-        create(:pack, user_id: user.id)
-        login_user(user.email, valid_password)
-        visit packs_path
-      end
+  describe "delete links" do
+    before do
+      create(:pack, user_id: user.id)
+      login_user(user.email, valid_password)
+      visit packs_path
+    end
 
-      it { should have_link('delete') }
-      it "should be able to delete pack" do
-        expect { click_link('delete', match: :first) }.to change(Pack, :count).by(-1)
-      end
+    it { should have_link('delete') }
+    it "should be able to delete pack" do
+      expect { click_link('delete', match: :first) }.to change(Pack, :count).by(-1)
     end
   end
 end

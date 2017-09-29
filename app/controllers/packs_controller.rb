@@ -5,8 +5,7 @@ class PacksController < ApplicationController
     @packs = current_user.packs
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @pack = Pack.new
@@ -18,8 +17,8 @@ class PacksController < ApplicationController
 
   def create
     @pack = Pack.new(pack_params.merge(user_id: current_user.id))
-    check_current
     if @pack.save
+      update_current_pack
       redirect_to @pack
     else
       render 'new'
@@ -27,8 +26,8 @@ class PacksController < ApplicationController
   end
 
   def update
-    check_current
     if @pack.update_attributes(pack_params)
+      update_current_pack
       redirect_to @pack
     else
       render 'edit'
@@ -50,9 +49,7 @@ class PacksController < ApplicationController
     @pack = Pack.find(params[:id])
   end
 
-  def check_current
-    if pack_params[:current]
-      current_user.packs.map { |pack| pack.update_attributes(current: false) }
-    end
+  def update_current_pack
+    current_user.update_attributes(current_pack: @pack.id) if pack_params[:current]
   end
 end

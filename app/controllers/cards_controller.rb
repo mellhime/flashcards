@@ -68,10 +68,14 @@ class CardsController < ApplicationController
   end
 
   def pack_by_name
-    current_user.packs.find_by(name: card_params[:pack]).nil? ? Pack.new(name: card_params[:pack]) : current_user.packs.find_by(name: card_params[:pack])
+    current_user.packs.find_by(name: card_params[:pack])
   end
 
   def choose_card
-    @card = current_user.packs.find_by(current: true).nil? ? current_user.cards.can_be_reviewed.order("RANDOM()").first : current_user.packs.find_by(current: true).cards.can_be_reviewed.order("RANDOM()").first
+    if current_user.current_pack.nil?
+      @card = current_user.cards.can_be_reviewed.random
+    else
+      @card = current_user.packs.find_by(id: current_user.current_pack).cards.can_be_reviewed.random
+    end
   end
 end
