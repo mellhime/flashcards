@@ -44,6 +44,10 @@ describe "Card pages" do
   describe "new card page" do
     before do
       login_user(user.email, valid_password)
+      visit new_pack_path
+      fill_in "Name", with: "Example"
+      find(:css, "#pack_current").set(0)
+      click_button "Create Pack"
       visit new_card_path
     end
 
@@ -64,7 +68,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
-        select pack.name, from: "card[pack]"
+        select "Example", from: "card[pack_id]"
       end
 
       it "should create a card" do
@@ -77,7 +81,7 @@ describe "Card pages" do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
         fill_in "Enter a URL", with: "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-        select pack.name, from: "card[pack]"
+        select "Example", from: "card[pack_id]"
         click_button submit
       end
 
@@ -88,7 +92,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
-        select "pack.name", from: "card[pack]"
+        select "Example", from: "card[pack_id]"
         attach_file :card_image, 'spec/support/fixtures/image.jpg'
         click_button submit
       end
@@ -101,6 +105,10 @@ describe "Card pages" do
     let(:card) { create(:card, user_id: user.id) }
     before do
       login_user(user.email, valid_password)
+      visit new_pack_path
+      fill_in "Name", with: "Example"
+      find(:css, "#pack_current").set(0)
+      click_button "Create Pack"
       visit edit_card_path(card)
     end
 
@@ -115,7 +123,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
-        select pack.name, from: "card[pack]"
+        select "Example", from: "card[pack_id]"
         click_button "Update Card"
       end
 
@@ -130,7 +138,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
-        select pack.name, from: "card[pack]"
+        select "Example", from: "card[pack_id]"
         click_button "Update Card"
       end
 

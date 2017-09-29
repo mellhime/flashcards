@@ -18,7 +18,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = Card.new(card_params.merge(user_id: current_user.id, pack: pack_by_name))
+    @card = Card.new(card_params.merge(user_id: current_user.id))
     if @card.save
       redirect_to @card
     else
@@ -27,7 +27,7 @@ class CardsController < ApplicationController
   end
 
   def update
-    if @card.update_attributes(card_params.merge(pack: pack_by_name))
+    if @card.update_attributes(card_params)
       redirect_to @card
     else
       render 'edit'
@@ -60,15 +60,11 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url, :pack)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url, :pack_id)
   end
 
   def find_card
     @card = Card.find(params[:id])
-  end
-
-  def pack_by_name
-    current_user.packs.find_by(name: card_params[:pack])
   end
 
   def choose_card
