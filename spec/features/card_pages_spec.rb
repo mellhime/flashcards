@@ -179,7 +179,7 @@ describe "Card pages" do
       end
 
       it { expect(page).to have_content('Правильно!') }
-      it { expect(Card.can_be_reviewed.count).to eq(1) }
+      it { expect(page).to have_content(second_card.translated_text) }
     end
 
     describe "with ivalid translation" do
@@ -189,18 +189,16 @@ describe "Card pages" do
       end
 
       it { expect(page).to have_content('Неправильно!') }
-      it { expect(Card.can_be_reviewed.count).to eq(2) }
     end
 
     describe "when there are no cards to review" do
       before do
-        Card.can_be_reviewed.delete_all
+        Card.delete_all
         visit root_path
       end
 
       it { expect(current_path).to eql(cards_path) }
       it { expect(page).to have_content('Нет карточек для проверки!') }
-      it { expect(Card.can_be_reviewed.count).to eq(0) }
     end
   end
 
@@ -210,7 +208,7 @@ describe "Card pages" do
     let(:card_from_pack) { create(:card, translated_text: "другойтекст", user_id: user.id, pack_id: pack.id) }
 
     before do
-      user.update_attributes(current_pack: pack.id)
+      user.update_attributes(current_pack_id: pack.id)
       card.update_attributes(review_date: Date.today)
       card_from_pack.update_attributes(review_date: Date.today)
       login_user(user.email, valid_password)

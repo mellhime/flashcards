@@ -7,6 +7,6 @@ class CreatePacks < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_column :users, :current_pack, :integer
+    add_column :users, :current_pack_id, :integer, foreign_key: true
   end
 end

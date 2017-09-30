@@ -60,7 +60,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url, :pack_id)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url, :pack_id, :current_pack_id)
   end
 
   def find_card
@@ -69,9 +69,9 @@ class CardsController < ApplicationController
 
   def choose_card
     @card = if current_user.current_pack.nil?
-              current_user.cards.can_be_reviewed.random
+              current_user.cards.random_card_to_review.first
             else
-              current_user.packs.find_by(id: current_user.current_pack).cards.can_be_reviewed.random
+              current_user.current_pack.cards.random_card_to_review.first
             end
   end
 end

@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20170926152151) do
     t.datetime "updated_at", null: false
     t.string "salt"
     t.string "crypted_password"
-    t.integer "current_pack"
+    t.integer "current_pack_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

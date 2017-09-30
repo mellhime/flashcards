@@ -10,7 +10,7 @@ class Card < ApplicationRecord
   validates :translated_text, presence: true, length: { maximum: 35 }, format: { with: VALID_TRANSLATED_TEXT_REGEX }
   validate :equality_of_original_and_translated_texts
   validates :review_date, presence: true
-  scope :can_be_reviewed, -> { where('DATE(review_date) <= ?', Date.today) }
+  scope :random_card_to_review, -> { where('DATE(review_date) <= ?', Date.today).order("RANDOM()") }
 
   has_attached_file :image, styles: { thumb: ["360x360>", :jpeg] }
   validates_attachment :image, content_type: { content_type: %r{\Aimage\/.*\z} }
@@ -30,9 +30,5 @@ class Card < ApplicationRecord
 
   def download_remote_image
     self.image = URI.parse(image_url).to_s
-  end
-
-  def self.random
-    order("RANDOM()").first
   end
 end

@@ -50,6 +50,6 @@ class PacksController < ApplicationController
   end
 
   def update_current_pack
-    current_user.update_attributes(current_pack: @pack.id) if pack_params[:current]
+    current_user.update_attributes(current_pack_id: @pack.id) if pack_params[:current]
   end
 end

@@ -61,7 +61,7 @@ describe "Pack pages" do
     describe "with valid information" do
       before do
         fill_in "Name", with: "Example"
-        find(:css, "#pack_current").set(1)
+        find(:css, "#pack_current").set(0)
       end
 
       it "should create a pack" do
@@ -81,6 +81,19 @@ describe "Pack pages" do
       it { should have_title("Редактирование") }
     end
 
+    describe "with invalid information" do
+      let(:new_name) { "" }
+      let(:new_current) { 0 }
+      before do
+        fill_in "Name", with: new_name
+        find(:css, "#pack_current").set(new_current)
+        click_button "Update Pack"
+      end
+
+      it { should have_content("error") }
+      it { expect(pack.reload.name).to eq pack.name }
+    end
+
     describe "with valid information and change the current pack" do
       let(:new_name) { "NewExample" }
       let(:new_current) { 1 }
@@ -92,21 +105,7 @@ describe "Pack pages" do
 
       it { should have_title(new_name) }
       it { expect(pack.reload.name).to eq new_name }
-      it { expect(user.reload.current_pack).to eq(Pack.find_by(name: new_name).id) }
-    end
-
-    describe "with invalid information" do
-      let(:new_name) { "" }
-      let(:new_current) { 1 }
-      before do
-        fill_in "Name", with: new_name
-        find(:css, "#pack_current").set(new_current)
-        click_button "Update Pack"
-      end
-
-      it { should have_content("error") }
-      it { expect(pack.reload.name).to eq pack.name }
-      it { expect(user.reload.current_pack).to be_nil }
+      it { expect(user.reload.current_pack).to eq(Pack.find_by(name: new_name)) }
     end
   end
 

@@ -61,16 +61,16 @@ describe Card do
     its(:review_date) { is_expected.to eq(Date.today + 3.days) }
   end
 
-  describe "scope can_be_reviewed" do
+  describe "scope random_card_to_review" do
 
     it "excludes cards that can't be reviewed" do
       card.update_attributes(review_date: Date.today + 2.days)
-      Card.can_be_reviewed.should_not include(card)
+      Card.random_card_to_review.should_not include(card)
     end
 
     it "includes cards that can be reviewed" do
       card.update_attributes(review_date: Date.today - 2.days)
-      Card.can_be_reviewed.should include(card)
+      Card.random_card_to_review.should include(card)
     end
   end
 

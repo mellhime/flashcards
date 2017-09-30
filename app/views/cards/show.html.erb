@@ -16,5 +16,5 @@
 
 <p>
   <strong>pack:</strong>
-  <%= @card.pack.name unless @card.pack.nil? %>
+  <%= @card.pack.name if @card.pack %>
 </p>

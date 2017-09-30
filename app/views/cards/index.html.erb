@@ -22,7 +22,7 @@
           <td><%= card.original_text %></td>
           <td><%= card.translated_text %></td>
           <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-          <td><%= card.pack.name unless card.pack.nil? %></td>
+          <td><%= card.pack.name if card.pack %></td>
           <td><%= link_to "show", card_path(card) %></td>
           <td><%= link_to "edit", edit_card_path(card) %></td>
           <td><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
