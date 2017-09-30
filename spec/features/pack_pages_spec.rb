@@ -34,7 +34,7 @@ describe "Pack pages" do
       login_user(user.email, valid_password)
       visit pack_path(pack)
     end
-    let(:pack) { create(:pack, user_id: user.id) }
+    
     it { should have_content(pack.name) }
     it { should have_title(pack.name) }
   end
@@ -92,6 +92,7 @@ describe "Pack pages" do
 
       it { should have_content("error") }
       it { expect(pack.reload.name).to eq pack.name }
+      it { expect(user.reload.current_pack).to be_nil }
     end
 
     describe "with valid information and change the current pack" do

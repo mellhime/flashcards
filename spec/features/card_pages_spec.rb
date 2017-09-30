@@ -5,6 +5,7 @@ describe "Card pages" do
 
   let(:user) { create(:user) }
   let(:pack) { create(:pack, user_id: user.id) }
+  let(:card) { create(:card, user_id: user.id) }
   let(:valid_password) { 'foobar' }
   after(:all) { User.delete_all }
 
@@ -34,7 +35,6 @@ describe "Card pages" do
       login_user(user.email, valid_password)
       visit card_path(card)
     end
-    let(:card) { create(:card, user_id: user.id) }
     it { should have_content(card.original_text) }
     it { should have_title(card.original_text) }
     it { should have_css('img') }
@@ -102,7 +102,6 @@ describe "Card pages" do
   end
 
   describe "edit card page" do
-    let(:card) { create(:card, user_id: user.id) }
     before do
       login_user(user.email, valid_password)
       visit new_pack_path
@@ -162,7 +161,6 @@ describe "Card pages" do
   end
 
   describe "check card translation" do
-    let(:card) { create(:card, user_id: user.id) }
     let(:second_card) { create(:card, user_id: user.id) }
 
     before do
@@ -203,8 +201,6 @@ describe "Card pages" do
   end
 
   describe "check card translation from current pack" do
-    let(:pack) { create(:pack, user_id: user.id) }
-    let(:card) { create(:card, user_id: user.id) }
     let(:card_from_pack) { create(:card, translated_text: "другойтекст", user_id: user.id, pack_id: pack.id) }
 
     before do
