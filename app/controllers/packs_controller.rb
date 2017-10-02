@@ -50,11 +50,11 @@ class PacksController < ApplicationController
   end
 
   def update_current_pack
+
     current_user.update_attributes(current_pack_id: @pack.id) if current?
   end
 
   def current?
-    params.permit(:current)
-    params[:current]
+    params[:current] == "true"
   end
 end

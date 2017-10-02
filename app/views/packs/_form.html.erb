@@ -15,7 +15,7 @@
     <% end %>
   <p><%= f.input :name %></p>
   <%= label_tag "Сделать текущей?" %>
-  <%= check_box_tag :current %>
+  <%= check_box_tag :current, checked = true %>
   <p><%= f.button :submit, class: "btn btn-large btn-primary"%></p>
   <% end %>
 </div>
