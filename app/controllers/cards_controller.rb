@@ -69,9 +69,9 @@ class CardsController < ApplicationController
 
   def choose_card
     @card = if current_user.current_pack.nil?
-              current_user.cards.random
+              current_user.cards
             else
-              current_user.current_pack.cards.random
-            end
+              current_user.current_pack.cards
+            end.random_card_to_review.first
   end
 end
