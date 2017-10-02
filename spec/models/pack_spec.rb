@@ -7,7 +7,6 @@ describe Pack do
   subject { pack }
 
   it { should respond_to(:name) }
-  it { should respond_to(:current) }
   it { should respond_to(:user_id) }
   it { should respond_to(:user) }
   it { should respond_to(:cards) }

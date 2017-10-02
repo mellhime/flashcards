@@ -46,7 +46,7 @@ describe "Card pages" do
       login_user(user.email, valid_password)
       visit new_pack_path
       fill_in "Name", with: "Example"
-      find(:css, "#pack_current").set(0)
+      find(:css, "#current").set(0)
       click_button "Create Pack"
       visit new_card_path
     end
@@ -106,7 +106,7 @@ describe "Card pages" do
       login_user(user.email, valid_password)
       visit new_pack_path
       fill_in "Name", with: "Example"
-      find(:css, "#pack_current").set(0)
+      find(:css, "#current").set(0)
       click_button "Create Pack"
       visit edit_card_path(card)
     end

@@ -42,7 +42,7 @@ class PacksController < ApplicationController
   private
 
   def pack_params
-    params.require(:pack).permit(:name, :current)
+    params.require(:pack).permit(:name)
   end
 
   def find_pack
@@ -50,6 +50,11 @@ class PacksController < ApplicationController
   end
 
   def update_current_pack
-    current_user.update_attributes(current_pack_id: @pack.id) if pack_params[:current]
+    current_user.update_attributes(current_pack_id: @pack.id) if current?
+  end
+
+  def current?
+    params.permit(:current)
+    params[:current]
   end
 end

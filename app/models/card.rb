@@ -31,4 +31,8 @@ class Card < ApplicationRecord
   def download_remote_image
     self.image = URI.parse(image_url).to_s
   end
+
+  def self.random
+    random_card_to_review.first
+  end
 end

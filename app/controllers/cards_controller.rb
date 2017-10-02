@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
+  before_action :choose_card, only: [:random]
 
   def index
     @cards = current_user.cards
@@ -40,7 +41,6 @@ class CardsController < ApplicationController
   end
 
   def random
-    choose_card
     return @card unless @card.nil?
     flash[:danger] = "Нет карточек для проверки!"
     redirect_to cards_path
@@ -60,7 +60,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url, :pack_id, :current_pack_id)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url, :pack_id)
   end
 
   def find_card
@@ -69,9 +69,9 @@ class CardsController < ApplicationController
 
   def choose_card
     @card = if current_user.current_pack.nil?
-              current_user.cards.random_card_to_review.first
+              current_user.cards.random
             else
-              current_user.current_pack.cards.random_card_to_review.first
+              current_user.current_pack.cards.random
             end
   end
 end

@@ -34,7 +34,7 @@ describe "Pack pages" do
       login_user(user.email, valid_password)
       visit pack_path(pack)
     end
-    
+
     it { should have_content(pack.name) }
     it { should have_title(pack.name) }
   end
@@ -61,7 +61,7 @@ describe "Pack pages" do
     describe "with valid information" do
       before do
         fill_in "Name", with: "Example"
-        find(:css, "#pack_current").set(0)
+        find(:css, "#current").set(0)
       end
 
       it "should create a pack" do
@@ -86,7 +86,7 @@ describe "Pack pages" do
       let(:new_current) { 0 }
       before do
         fill_in "Name", with: new_name
-        find(:css, "#pack_current").set(new_current)
+        find(:css, "#current").set(new_current)
         click_button "Update Pack"
       end
 
@@ -100,7 +100,7 @@ describe "Pack pages" do
       let(:new_current) { 1 }
       before do
         fill_in "Name", with: new_name
-        find(:css, "#pack_current").set(new_current)
+        find(:css, "#current").set(new_current)
         click_button "Update Pack"
       end
 
