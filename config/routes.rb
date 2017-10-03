@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :user_sessions
+  resources :packs
 
   match '/login', to: 'user_sessions#new', via: 'get'
   match '/logout', to: 'user_sessions#destroy', via: 'delete'

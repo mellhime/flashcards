@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe "Card pages" do
-
   subject { page }
 
   let(:user) { create(:user) }
+  let(:pack) { create(:pack, user_id: user.id) }
+  let(:card) { create(:card, user_id: user.id) }
   let(:valid_password) { 'foobar' }
-  after(:all) { User.delete_all }
 
-  describe "index" do
+  describe "index page" do
     before do
       create(:card, original_text: "Example", translated_text: "Пример", user_id: user.id)
       create(:card, original_text: "NewExample", translated_text: "НовыйПример", user_id: user.id)
@@ -29,22 +29,32 @@ describe "Card pages" do
     end
   end
 
-  describe "card page" do
+  describe "show page" do
     before do
       login_user(user.email, valid_password)
       visit card_path(card)
     end
-    let(:card) { create(:card, user_id: user.id) }
     it { should have_content(card.original_text) }
     it { should have_title(card.original_text) }
     it { should have_css('img') }
+    it { should have_content(card.pack.name) }
   end
 
   describe "new card page" do
     before do
       login_user(user.email, valid_password)
+      visit new_pack_path
+      fill_in "Name", with: "Example"
+      find(:css, "#current").set(0)
+      click_button "Create Pack"
       visit new_card_path
     end
+
+    describe "page" do
+      it { should have_link("Создать колоду") }
+      it { should have_field("Image") }
+    end
+
     let(:submit) { "Create Card" }
 
     describe "with invalid information" do
@@ -57,6 +67,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
+        select "Example", from: "card[pack_id]"
       end
 
       it "should create a card" do
@@ -69,6 +80,7 @@ describe "Card pages" do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
         fill_in "Enter a URL", with: "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+        select "Example", from: "card[pack_id]"
         click_button submit
       end
 
@@ -79,6 +91,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: "Example"
         fill_in "Translated text", with: "Пример"
+        select "Example", from: "card[pack_id]"
         attach_file :card_image, 'spec/support/fixtures/image.jpg'
         click_button submit
       end
@@ -88,9 +101,12 @@ describe "Card pages" do
   end
 
   describe "edit card page" do
-    let(:card) { create(:card, user_id: user.id) }
     before do
       login_user(user.email, valid_password)
+      visit new_pack_path
+      fill_in "Name", with: "Example"
+      find(:css, "#current").set(0)
+      click_button "Create Pack"
       visit edit_card_path(card)
     end
 
@@ -105,6 +121,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
+        select "Example", from: "card[pack_id]"
         click_button "Update Card"
       end
 
@@ -119,6 +136,7 @@ describe "Card pages" do
       before do
         fill_in "Original text", with: new_orig_text
         fill_in "Translated text", with: new_trans_text
+        select "Example", from: "card[pack_id]"
         click_button "Update Card"
       end
 
@@ -142,8 +160,7 @@ describe "Card pages" do
   end
 
   describe "check card translation" do
-    let!(:card) { create(:card, user_id: user.id) }
-    let!(:second_card) { create(:card, user_id: user.id) }
+    let(:second_card) { create(:card, user_id: user.id) }
 
     before do
       card.update_attributes(review_date: Date.today)
@@ -159,7 +176,7 @@ describe "Card pages" do
       end
 
       it { expect(page).to have_content('Правильно!') }
-      it { expect(Card.can_be_reviewed.count).to eq(1) }
+      it { expect(page).to have_content(second_card.translated_text) }
     end
 
     describe "with ivalid translation" do
@@ -169,7 +186,6 @@ describe "Card pages" do
       end
 
       it { expect(page).to have_content('Неправильно!') }
-      it { expect(Card.can_be_reviewed.count).to eq(2) }
     end
 
     describe "when there are no cards to review" do
@@ -180,7 +196,21 @@ describe "Card pages" do
 
       it { expect(current_path).to eql(cards_path) }
       it { expect(page).to have_content('Нет карточек для проверки!') }
-      it { expect(Card.can_be_reviewed.count).to eq(0) }
     end
+  end
+
+  describe "check card translation from current pack" do
+    let(:card_from_pack) { create(:card, translated_text: "другойтекст", user_id: user.id, pack_id: pack.id) }
+
+    before do
+      user.update_attributes(current_pack_id: pack.id)
+      card.update_attributes(review_date: Date.today)
+      card_from_pack.update_attributes(review_date: Date.today)
+      login_user(user.email, valid_password)
+      visit root_path
+    end
+
+    it { expect(page).to have_content(card_from_pack.translated_text) }
+    it { expect(page).not_to have_content(card.translated_text) }
   end
 end

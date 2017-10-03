@@ -13,3 +13,8 @@
   <strong>image:</strong>
   <%= image_tag(@card.image.url(:thumb)) if @card.image.exists? %>
 </p>
+
+<p>
+  <strong>pack:</strong>
+  <%= @card.pack.name if @card.pack %>
+</p>

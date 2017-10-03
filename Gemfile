@@ -56,6 +56,7 @@ group :development, :test do
   gem 'rake'
   gem 'rspec-its'
   gem 'pry'
+  gem 'database_cleaner'
 end
 
 group :development do

@@ -1,15 +1,17 @@
-<% provide(:title, 'Все карточки') %>
-<h1>Все карточки</h1>
+<% provide(:title, "#{@pack.name}") %>
+<p>
+  <strong>name:</strong>
+  <%= @pack.name %>
+</p>
 
-  <table class="table table-striped">
-    <caption>Все карточки</caption>
+<table class="table table-striped">
+    <caption>Карточки</caption>
 
     <thead>
       <tr>
         <th>Слово</th>
         <th>Перевод</th>
         <th>Дата проверки</th>
-        <th>Колода</th>
         <th>Перейти</th>
         <th>Редактировать</th>
         <th>Удалить</th>
@@ -17,12 +19,11 @@
     </thead>
 
     <tbody>
-      <% @cards.each do |card| %>
+      <% @pack.cards.each do |card| %>
         <tr>
           <td><%= card.original_text %></td>
           <td><%= card.translated_text %></td>
           <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-          <td><%= card.pack.name if card.pack %></td>
           <td><%= link_to "show", card_path(card) %></td>
           <td><%= link_to "edit", edit_card_path(card) %></td>
           <td><%= link_to "delete", card_path(card), method: :delete, data: { confirm:

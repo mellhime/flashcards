@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :cards
+  has_many :packs
+  belongs_to :current_pack, class_name: 'Pack', optional: true
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end

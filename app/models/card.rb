@@ -1,6 +1,7 @@
 class Card < ApplicationRecord
   belongs_to :user
-  before_validation :create_review_date, on: :create
+  belongs_to :pack
+  # before_validation :create_review_date, on: :create
   before_save :download_remote_image, if: :image_url_provided?
 
   VALID_ORIGINAL_TEXT_REGEX = /\A[A-z]+\z/
@@ -9,7 +10,7 @@ class Card < ApplicationRecord
   validates :translated_text, presence: true, length: { maximum: 35 }, format: { with: VALID_TRANSLATED_TEXT_REGEX }
   validate :equality_of_original_and_translated_texts
   validates :review_date, presence: true
-  scope :can_be_reviewed, -> { where('DATE(review_date) <= ?', Date.today) }
+  scope :random_card_to_review, -> { where('DATE(review_date) <= ?', Date.today).order("RANDOM()") }
 
   has_attached_file :image, styles: { thumb: ["360x360>", :jpeg] }
   validates_attachment :image, content_type: { content_type: %r{\Aimage\/.*\z} }

@@ -1,19 +1,21 @@
 class CardsController < ApplicationController
   before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
+  before_action :choose_card, only: [:random]
 
   def index
     @cards = current_user.cards
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @card = Card.new
+    @packs = current_user.packs
   end
 
   def edit
     redirect_to cards_path unless current_user.cards.include?(@card)
+    @packs = current_user.packs
   end
 
   def create
@@ -39,7 +41,6 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = current_user.cards.can_be_reviewed.order("RANDOM()").first
     return @card unless @card.nil?
     flash[:danger] = "Нет карточек для проверки!"
     redirect_to cards_path
@@ -59,10 +60,18 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :image_url, :pack_id)
   end
 
   def find_card
     @card = Card.find(params[:id])
+  end
+
+  def choose_card
+    @card = if current_user.current_pack.nil?
+              current_user.cards
+            else
+              current_user.current_pack.cards
+            end.random_card_to_review.first
   end
 end

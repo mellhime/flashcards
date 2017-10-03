@@ -5,5 +5,6 @@ FactoryGirl.define do
     review_date "01.01.2001"
     image { File.new("#{Rails.root}/spec/support/fixtures/image.jpg") }
     user
+    pack
   end
 end
