@@ -31,11 +31,10 @@ describe Pack do
 
   describe "card associations" do
     before { pack.save }
-    let!(:first_card)  { create(:card, pack: pack) }
-    let!(:second_card) { create(:card, pack: pack) }
+    let!(:card)  { create(:card, pack: pack) }
 
     it "should have cards" do
-      expect(pack.cards.to_a).to eq [first_card, second_card]
+      expect(pack.cards).to include(card)
     end
   end
 end
