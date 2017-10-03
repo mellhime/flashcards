@@ -31,7 +31,7 @@ describe Pack do
 
   describe "card associations" do
     before { pack.save }
-    let!(:card)  { create(:card, pack: pack) }
+    let!(:card) { create(:card, pack: pack) }
 
     it "should have cards" do
       expect(pack.cards).to include(card)
