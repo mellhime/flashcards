@@ -16,6 +16,7 @@
     <% end %>
   <p><%= f.input :original_text, hint: 'in English' %></p>
   <p><%= f.input :translated_text, hint: 'in Russian' %></p>
+  <p><%= f.date_select :review_date, default: 3.days.from_now %></p>
   <% unless @packs.nil? %>
     <%= f.input :pack_id, collection: @packs %>
   <% end %>
