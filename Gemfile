@@ -53,10 +53,6 @@ group :development, :test do
   gem 'rubocop'
   gem 'factory_girl'
   gem 'factory_girl_rails'
-<<<<<<< HEAD
-=======
-  gem 'will_paginate'
->>>>>>> c360856... add rails12_factor
   gem 'rake'
   gem 'rspec-its'
   gem 'pry'
