@@ -10,6 +10,8 @@
         <th>Перевод</th>
         <th>Дата проверки</th>
         <th>Колода</th>
+        <th>Кол-во проверок</th>
+        <th>Кол-во ошибок</th>
         <th>Перейти</th>
         <th>Редактировать</th>
         <th>Удалить</th>
@@ -23,6 +25,8 @@
           <td><%= card.translated_text %></td>
           <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
           <td><%= card.pack.name if card.pack %></td>
+          <td><%= card.check_count %></td>
+          <td><%= card.fails_count %></td>
           <td><%= link_to "show", card_path(card) %></td>
           <td><%= link_to "edit", edit_card_path(card) %></td>
           <td><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
