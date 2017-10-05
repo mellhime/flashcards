@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.4.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -27,12 +28,13 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'simple_form'
-gem 'bcrypt'
 gem 'sorcery'
 gem 'figaro'
 gem 'paperclip'
 gem 'aws-sdk', '2.10.42'
 gem 'validate_url'
+gem 'interactor'
+gem 'rails_12factor'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -51,8 +53,6 @@ group :development, :test do
   gem 'rubocop'
   gem 'factory_girl'
   gem 'factory_girl_rails'
-  gem 'will_paginate'
-  gem "interactor"
   gem 'rake'
   gem 'rspec-its'
   gem 'pry'
