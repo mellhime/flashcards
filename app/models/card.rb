@@ -37,7 +37,7 @@ class Card < ApplicationRecord
   end
 
   def add_review_date
-    review_date = Time.current + case check_count
+    self.review_date = Time.current + case self.check_count
                                       when 1..3
                                         12.hours
                                       when 4..6
