@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20171005113326) do
     t.string "image_url"
     t.integer "pack_id"
     t.integer "check_count", default: 0
-    t.integer "fails_count", default: 0
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 

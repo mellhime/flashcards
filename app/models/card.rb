@@ -2,7 +2,7 @@ class Card < ApplicationRecord
   belongs_to :user
   belongs_to :pack
   before_save :download_remote_image, if: :image_url_provided?
-  before_save :add_review_date
+  before_save :add_review_date, if: :check_count_not_zero?
 
   VALID_ORIGINAL_TEXT_REGEX = /\A[A-z]+\z/
   validates :original_text, presence: true, length: { maximum: 35 }, format: { with: VALID_ORIGINAL_TEXT_REGEX }
@@ -28,24 +28,26 @@ class Card < ApplicationRecord
     !image_url.blank?
   end
 
+  def check_count_not_zero?
+    !check_count.zero?
+  end
+
   def download_remote_image
     self.image = URI.parse(image_url).to_s
   end
 
   def add_review_date
-    self.review_date = Time.current + case self.check_count
-                                      when 1
+    review_date = Time.current + case check_count
+                                      when 1..3
                                         12.hours
-                                      when 2
+                                      when 4..6
                                         3.days
-                                      when 3
+                                      when 7..9
                                         7.days
-                                      when 4
+                                      when 10..12
                                         14.days
-                                      when 5
+                                      when 13..15
                                         30.days
-                                      when 0
-                                        1.hours
                                       end
   end
 end
