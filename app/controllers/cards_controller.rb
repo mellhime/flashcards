@@ -47,7 +47,7 @@ class CardsController < ApplicationController
   end
 
   def check
-    result = CheckCard.call(user_text: params[:user_text], card: @card)
+    result = CheckCard.call(user_text: params[:user_text], card: @card, session: session)
 
     if result.success?
       flash[:success] = result.message
@@ -68,10 +68,11 @@ class CardsController < ApplicationController
   end
 
   def choose_card
+    return @card = Card.find_by(id: session[:fails_count]["id"]) unless session[:fails_count].nil?
     @card = if current_user.current_pack.nil?
-              current_user.cards
+              current_user.cards.random_card_to_review.first
             else
-              current_user.current_pack.cards
-            end.random_card_to_review.first
+              current_user.current_pack.cards.random_card_to_review.first
+            end
   end
 end
