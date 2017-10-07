@@ -20,6 +20,5 @@ class CheckCard
       context.card.save
       context.fail!(message: "Неправильно!")
     end
-
   end
 end
