@@ -129,11 +129,11 @@ describe Card do
 
   describe "adding review_date depend on check_count" do
     results = {
-                1 => 12.hours,
-                2 => 3.days,
-                3 => 7.days,
-                4 => 14.days,
-                5 => 30.days
+                 1 => 12.hours,
+                 2 => 3.days,
+                 3 => 7.days,
+                 4 => 14.days,
+                 5 => 30.days
               }
 
     results.each do |key, value|
