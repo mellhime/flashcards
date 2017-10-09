@@ -114,20 +114,6 @@ describe Card do
   end
 
   describe "adding review_date depend on check_count" do
-    before { card.update_attributes(check_count: 1) }
-    it 'should add review_date to card' do
-      expect(card.review_date.change(sec: 0)).to eq(Time.current.change(sec: 0) + 12.hours)
-    end
-  end
-
-  describe "adding review_date depend on check_count" do
-    before { card.update_attributes(check_count: 2) }
-    it 'should add review_date to card' do
-      expect(card.review_date.change(sec: 0)).to eq(Time.current.change(sec: 0) + 3.days)
-    end
-  end
-
-  describe "adding review_date depend on check_count" do
     results = {
                  1 => 12.hours,
                  2 => 3.days,
@@ -137,11 +123,8 @@ describe Card do
               }
 
     results.each do |key, value|
-      before do
+      it 'should add review_date to card' do
         card.update_attributes(check_count: key)
-      end
-
-      xit 'should add review_date to card' do
         expect(card.review_date.change(sec: 0)).to eq(Time.current.change(sec: 0) + value)
       end
     end

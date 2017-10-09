@@ -177,7 +177,6 @@ describe "Card pages" do
 
       it { expect(page).to have_content('Правильно!') }
       it { expect(page).to have_content(second_card.translated_text) }
-      it { expect(card.reload.check_count).to eq(1) }
     end
 
     describe "with ivalid translation" do
@@ -188,7 +187,6 @@ describe "Card pages" do
 
       it { expect(page).to have_content('Неправильно!') }
       it { expect(page).to have_content(card.translated_text) }
-      it { expect(card.reload.check_count).to eq(0) }
     end
 
     describe "when there are no cards to review" do

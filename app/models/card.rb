@@ -1,4 +1,12 @@
 class Card < ApplicationRecord
+  REVIEW_STAGE = {
+                  1 => 12.hours,
+                  2 => 3.days,
+                  3 => 7.days,
+                  4 => 14.days,
+                  5 => 30.days
+                 }.freeze
+
   belongs_to :user
   belongs_to :pack
   before_save :download_remote_image, if: :image_url_provided?
@@ -35,14 +43,6 @@ class Card < ApplicationRecord
   def download_remote_image
     self.image = URI.parse(image_url).to_s
   end
-
-  REVIEW_STAGE = {
-                  1 => 12.hours,
-                  2 => 3.days,
-                  3 => 7.days,
-                  4 => 14.days,
-                  5 => 30.days
-                 }.freeze
 
   def add_review_date
     self.review_date = Time.current + REVIEW_STAGE[check_count]
