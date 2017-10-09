@@ -36,18 +36,15 @@ class Card < ApplicationRecord
     self.image = URI.parse(image_url).to_s
   end
 
+  REVIEW_STAGE = {
+    1 => 12.hours,
+    2 => 3.days,
+    3 => 7.days,
+    4 => 14.days,
+    5 => 30.days
+  } 
+
   def add_review_date
-    self.review_date = Time.current + case self.check_count
-                                      when 1
-                                        12.hours
-                                      when 2
-                                        3.days
-                                      when 3
-                                        7.days
-                                      when 4
-                                        14.days
-                                      when 5
-                                        30.days
-                                      end
+    self.review_date = Time.current + REVIEW_STAGE[check_count]
   end
 end
