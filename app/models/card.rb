@@ -37,12 +37,12 @@ class Card < ApplicationRecord
   end
 
   REVIEW_STAGE = {
-    1 => 12.hours,
-    2 => 3.days,
-    3 => 7.days,
-    4 => 14.days,
-    5 => 30.days
-  } 
+                    1 => 12.hours,
+                    2 => 3.days,
+                    3 => 7.days,
+                    4 => 14.days,
+                    5 => 30.days
+                  }.freeze
 
   def add_review_date
     self.review_date = Time.current + REVIEW_STAGE[check_count]
