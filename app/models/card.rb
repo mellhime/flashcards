@@ -13,9 +13,9 @@ class Card < ApplicationRecord
   before_save :add_review_date, if: :check_count_not_zero?
 
   VALID_ORIGINAL_TEXT_REGEX = /\A[A-z]+\z/
-  validates :original_text, presence: true, length: { maximum: 35 }, format: { with: VALID_ORIGINAL_TEXT_REGEX }
+  #validates :original_text, presence: true, length: { maximum: 35 }, format: { with: VALID_ORIGINAL_TEXT_REGEX }
   VALID_TRANSLATED_TEXT_REGEX = /\A[\u0400-\u04FF]*\z/
-  validates :translated_text, presence: true, length: { maximum: 35 }, format: { with: VALID_TRANSLATED_TEXT_REGEX }
+  #validates :translated_text, presence: true, length: { maximum: 35 }, format: { with: VALID_TRANSLATED_TEXT_REGEX }
   validate :equality_of_original_and_translated_texts
   validates :review_date, presence: true
   scope :random_card_to_review, -> { where('DATE(review_date) <= ?', Date.today).order("RANDOM()") }
