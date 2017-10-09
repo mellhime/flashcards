@@ -1,10 +1,10 @@
 class Card < ApplicationRecord
   REVIEW_STAGE = {
-                  1 => 12.hours,
-                  2 => 3.days,
-                  3 => 7.days,
-                  4 => 14.days,
-                  5 => 30.days
+                    1 => 12.hours,
+                    2 => 3.days,
+                    3 => 7.days,
+                    4 => 14.days,
+                    5 => 30.days
                  }.freeze
 
   belongs_to :user
