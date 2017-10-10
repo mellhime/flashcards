@@ -35,6 +35,7 @@ gem 'aws-sdk', '2.10.42'
 gem 'validate_url'
 gem 'interactor'
 gem 'rails_12factor'
+gem 'damerau-levenshtein'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
