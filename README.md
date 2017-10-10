@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/mellhime/flashcards.svg?branch=master)](https://travis-ci.org/mellhime/flashcards)
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/mellhime/flashcards)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ece6768a9aa07dc15f4b/maintainability)](https://codeclimate.com/github/mellhime/flashcards/maintainability)
 
 # README
 This README would normally document whatever steps are necessary to get the
