@@ -1,8 +1,16 @@
 class Card < ApplicationRecord
+  REVIEW_STAGE = {
+                    1 => 12.hours,
+                    2 => 3.days,
+                    3 => 7.days,
+                    4 => 14.days,
+                    5 => 30.days
+                 }.freeze
+
   belongs_to :user
   belongs_to :pack
-  # before_validation :create_review_date, on: :create
   before_save :download_remote_image, if: :image_url_provided?
+  before_save :add_review_date, if: :check_count_not_zero?
 
   VALID_ORIGINAL_TEXT_REGEX = /\A[A-z]+\z/
   validates :original_text, presence: true, length: { maximum: 35 }, format: { with: VALID_ORIGINAL_TEXT_REGEX }
@@ -28,7 +36,15 @@ class Card < ApplicationRecord
     !image_url.blank?
   end
 
+  def check_count_not_zero?
+    !check_count.zero?
+  end
+
   def download_remote_image
     self.image = URI.parse(image_url).to_s
+  end
+
+  def add_review_date
+    self.review_date = Time.current + REVIEW_STAGE[check_count]
   end
 end

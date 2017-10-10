@@ -13,6 +13,7 @@ describe Card do
   it { should respond_to(:user) }
   its(:user) { should eq user }
   it { should respond_to(:image) }
+  it { should respond_to(:check_count) }
 
   it { should be_valid }
 
@@ -58,11 +59,9 @@ describe Card do
 
   describe "when review_date have been created" do
     its(:review_date) { is_expected.not_to be_nil }
-    # its(:review_date) { is_expected.to eq(Date.today + 3.days) }
   end
 
   describe "scope random_card_to_review" do
-
     it "excludes cards that can't be reviewed" do
       card.update_attributes(review_date: Date.today + 2.days)
       Card.random_card_to_review.should_not include(card)
@@ -110,6 +109,23 @@ describe Card do
 
       it 'should add error' do
         expect(card.errors.messages).to include(image_url: ["is not a valid URL"])
+      end
+    end
+  end
+
+  describe "adding review_date depend on check_count" do
+    results = {
+                 1 => 12.hours,
+                 2 => 3.days,
+                 3 => 7.days,
+                 4 => 14.days,
+                 5 => 30.days
+              }
+
+    results.each do |key, value|
+      it 'should add review_date to card' do
+        card.update_attributes(check_count: key)
+        expect(card.review_date.change(sec: 0)).to eq(Time.current.change(sec: 0) + value)
       end
     end
   end

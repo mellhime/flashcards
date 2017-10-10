@@ -186,6 +186,7 @@ describe "Card pages" do
       end
 
       it { expect(page).to have_content('Неправильно!') }
+      it { expect(page).to have_content(card.translated_text) }
     end
 
     describe "when there are no cards to review" do
