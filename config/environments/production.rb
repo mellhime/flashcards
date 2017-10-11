@@ -71,7 +71,9 @@ Rails.application.configure do
     user_name:            ENV["GMAIL_ADDRESS"],
     password:             ENV["GMAIL_PASSWORD"],
     authentication:       'plain',
-    enable_starttls_auto: true  }
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'
+    }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

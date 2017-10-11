@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe CardsMailer, :type => :mailer do
+RSpec.describe CardsMailer, type: :mailer do
   describe "unreviewed_cards_email" do
     let(:user) { create(:user) }
     let(:mail) { CardsMailer.unreviewed_cards_email(user) }
