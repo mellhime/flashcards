@@ -36,6 +36,7 @@ gem 'validate_url'
 gem 'interactor'
 gem 'rails_12factor'
 gem 'damerau-levenshtein'
+gem 'whenever', require: false
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

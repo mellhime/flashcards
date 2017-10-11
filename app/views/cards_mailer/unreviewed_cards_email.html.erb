@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Flashcarder, <%= @user.name %></h1>
+    <p>
+      You have cards to review.<br>
+    </p>
+    <p>
+      To login to the site, just follow:
+    </p>  
+    <p>
+      <%= link_to "link", login_url %>
+    </p>
+  </body>
+</html>
