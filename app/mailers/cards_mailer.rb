@@ -1,5 +1,3 @@
-include Rails.application.routes.url_helpers
-
 class CardsMailer < ApplicationMailer
   default from: 'notifications@example.com'
 
