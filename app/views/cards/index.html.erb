@@ -1,19 +1,17 @@
-<% provide(:title, 'Все карточки') %>
-<h1>Все карточки</h1>
-
+<% provide(:title, 'All cards') %>
+<h1><%= t '.all_cards' %></h1>
   <table class="table table-striped">
-    <caption>Все карточки</caption>
 
     <thead>
       <tr>
-        <th>Слово</th>
-        <th>Перевод</th>
-        <th>Дата проверки</th>
-        <th>Колода</th>
-        <th>Кол-во проверок</th>
-        <th>Перейти</th>
-        <th>Редактировать</th>
-        <th>Удалить</th>
+        <th><%= t '.original_text' %></th>
+        <th><%= t '.translated_text' %></th>
+        <th><%= t '.review_date' %></th>
+        <th><%= t '.pack' %></th>
+        <th><%= t '.count' %></th>
+        <th><%= t '.show' %></th>
+        <th><%= t '.edit' %></th>
+        <th><%= t '.delete' %></th>
       </tr>
     </thead>
 
@@ -25,10 +23,10 @@
           <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
           <td><%= card.pack.name if card.pack %></td>
           <td><%= card.check_count %></td>
-          <td><%= link_to "show", card_path(card) %></td>
-          <td><%= link_to "edit", edit_card_path(card) %></td>
-          <td><%= link_to "delete", card_path(card), method: :delete, data: { confirm:
-            "You sure?" } %></td>
+          <td><%= link_to "#{t '.show'}", card_path(card) %></td>
+          <td><%= link_to "#{t '.edit'}", edit_card_path(card) %></td>
+          <td><%= link_to "#{t '.delete'}", card_path(card), method: :delete, data: { confirm:
+            "#{t '.confirmation'}" } %></td>
         </tr>
       <% end %>
     </tbody>

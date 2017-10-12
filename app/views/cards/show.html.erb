@@ -1,20 +1,20 @@
 <% provide(:title, "#{@card.original_text}") %>
 <p>
-  <strong>original_text:</strong>
+  <strong><%= t '.original_text' %>:</strong>
   <%= @card.original_text %>
 </p>
 
 <p>
-  <strong>translated_text:</strong>
+  <strong><%= t '.translated_text' %>:</strong>
   <%= @card.translated_text %>
 </p>
 
 <p>
-  <strong>image:</strong>
+  <strong><%= t '.image' %>:</strong>
   <%= image_tag(@card.image.url(:thumb)) if @card.image.exists? %>
 </p>
 
 <p>
-  <strong>pack:</strong>
+  <strong><%= t '.pack' %>:</strong>
   <%= @card.pack.name if @card.pack %>
 </p>

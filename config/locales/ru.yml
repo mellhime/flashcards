@@ -1,0 +1,104 @@
+ru:
+  user_sessions:
+    new:
+      login: Вход
+      email: Электронная почта
+      password: Пароль
+    form:
+      email: Электронная почта
+      password: Пароль
+      login: Вход
+    create:
+      success: Успешный вход
+      danger: Не удалось войти
+    destroy:
+      notice: Вы вышли!
+  users:
+    new:
+      new_user: Новый пользователь
+    edit:
+      edit_user: Редактировать
+    index:
+      all_users: Все пользователи
+    show:
+      name: Имя
+      email: Эл.почта
+      edit: Редактировать
+      delete: Удалить
+      confirmation: Вы уверены?
+    create:
+      success: Добро пожаловать во Флэшкардер
+    update:
+      success: Успешно обновлено
+  packs:
+    new:
+      new_pack: Новая колода
+    edit:
+      edit_pack: Редактировать колоду
+    index:
+      all_packs: Все колоды
+      count: Количество карточек
+      name: Название
+      show: Перейти
+      edit: Редактировать
+      delete: Удалить
+      confirmation: Вы уверены?
+    show:
+      name: Название
+      review_date: Дата проверки
+      original_text: Слово
+      translated_text: Перевод
+      show: Перейти
+      edit: Редактировать
+      delete: Удалить
+      confirmation: Вы уверены?
+    form:
+      current: Сделать текущей?
+  cards:
+    new:
+      new_card: Новая карточка
+    edit:
+      edit_card: Редактировать
+    random:
+      check: Проверить
+      next_card: Следующая карточка
+      danger: Нет карточек для проверки
+    check:
+      success: Правильно!
+      danger: Неправильно!
+    index:
+      all_cards: Все карточки
+      count: Кол-во проверок
+      original_text: Слово
+      translated_text: Перевод
+      review_date: Дата проверки
+      pack: Колода
+      show: Перейти
+      edit: Редактировать
+      delete: Удалить
+      confirmation: Вы уверены?
+    show:
+      original_text: Слово
+      translated_text: Перевод
+      image: Изображение
+      pack: Колода
+  oauths:
+    callback:
+      success: "Удачный вход!"
+      danger: "Неудачный вход!"
+  layouts:
+    application:
+      title: Флэшкардер
+      main: Главная
+      all_cards: Все карточки
+      new_card: Новая карточка
+      edit_profile: Редактировать профиль
+      logout: Выход
+      add_pack: Добавить колоду
+      all_packs: Все колоды
+      register: Регистрация
+      login: Вход
+      vk_login: Вход через ВК
+      google_login: Вход через Google
+      language: Смена языка
+      notice: Залогиньтесь

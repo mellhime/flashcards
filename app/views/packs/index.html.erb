@@ -1,16 +1,14 @@
-<% provide(:title, 'Все колоды') %>
-<h1>Все колоды</h1>
-
+<% provide(:title, 'All packs') %>
+<h1><%= t '.all_packs' %></h1>
   <table class="table table-striped">
-    <caption>Все колоды</caption>
-
+  
     <thead>
       <tr>
-        <th>Название</th>
-        <th>Количество карточек</th>
-        <th>Перейти</th>
-        <th>Редактировать</th>
-        <th>Удалить</th>
+        <th><%= t '.name' %></th>
+        <th><%= t '.count' %></th>
+        <th><%= t '.show' %></th>
+        <th><%= t '.edit' %></th>
+        <th><%= t '.delete' %></th>
       </tr>
     </thead>
 
@@ -19,10 +17,10 @@
         <tr>
           <td><%= pack.name %></td>
           <td><%= pack.cards.count %></td>
-          <td><%= link_to "show", pack_path(pack) %></td>
-          <td><%= link_to "edit", edit_pack_path(pack) %></td>
-          <td><%= link_to "delete", pack_path(pack), method: :delete, data: { confirm:
-            "You sure?" } %></td>
+          <td><%= link_to "#{t '.show'}", pack_path(pack) %></td>
+          <td><%= link_to "#{t '.edit'}", edit_pack_path(pack) %></td>
+          <td><%= link_to "#{t '.delete'}", pack_path(pack), method: :delete, data: { confirm:
+            "#{t '.confirmation'}" } %></td>
         </tr>
       <% end %>
     </tbody>

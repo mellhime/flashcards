@@ -42,7 +42,7 @@ class CardsController < ApplicationController
 
   def random
     return @card unless @card.nil?
-    flash[:danger] = "Нет карточек для проверки!"
+    flash[:danger] = t('.danger')
     redirect_to cards_path
   end
 
@@ -50,9 +50,9 @@ class CardsController < ApplicationController
     result = CheckCard.call(user_text: params[:user_text], card: @card, session: session)
 
     if result.success?
-      flash[:success] = result.message
+      flash[:success] = t('.success')
     else
-      flash[:danger] = result.message
+      flash[:danger] = t('.danger')
     end
     redirect_to root_path
   end

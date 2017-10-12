@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:index, :new, :create]
+  skip_before_action :require_login, only: [:index, :new, :create, :change_locale]
   before_action :find_user, only: [:show, :destroy]
 
   def show; end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Welcome to the Flashcarder"
+      flash[:success] = t('.success')
       auto_login(@user)
       redirect_to @user
     else
@@ -25,12 +25,13 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    @locales = Rails.configuration.i18n.available_locales
   end
 
   def update
     @user = current_user
     if @user.update_attributes(user_params)
-      flash[:success] = "Successfully updated"
+      flash[:success] = t('.success')
       redirect_to @user
     else
       render 'edit'
@@ -42,10 +43,15 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def change_locale
+    I18n.locale = I18n.locale == :ru ? :en : :ru
+    redirect_to root_path
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :locale)
   end
 
   def find_user

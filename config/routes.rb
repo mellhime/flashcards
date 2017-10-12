@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get "oauth/callback" => "oauths#callback"
   get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
   delete "oauth/:provider" => "oauths#destroy", :as => :delete_oauth
+  get "/change_locale" => "users#change_locale", :as => :change_language
 end
