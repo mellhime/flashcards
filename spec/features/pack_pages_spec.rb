@@ -6,7 +6,6 @@ describe "Pack pages" do
   let(:user) { create(:user) }
   let(:pack) { create(:pack, user_id: user.id) }
   let(:valid_password) { 'foobar' }
-  #after(:all) { User.delete_all }
 
   describe "index page" do
     before do

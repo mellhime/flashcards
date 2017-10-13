@@ -112,4 +112,4 @@ en:
       language: Change language
       notice: Please login
   interactors:
-    misprint: "You have misprint: %{context.user_text}. Word: %{context.card.original_text} - %{context.card.translated_text}"
+    misprint: "You have misprint: %{user_text}. Word: %{card.original_text} - %{card.translated_text}"

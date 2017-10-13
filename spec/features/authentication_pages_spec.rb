@@ -62,7 +62,6 @@ describe "Authentication" do
     end
 
     describe "when attempting to visit a protected page" do
-
       before do
         visit edit_user_path(user)
         fill_in "email",    with: user.email

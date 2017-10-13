@@ -155,7 +155,7 @@ describe "Card pages" do
 
     it { should have_link('Delete') }
     it "should be able to delete card" do
-      expect{click_link('Delete', match: :first)}.to change(Card, :count).by(-1)
+      expect { click_link('Delete', match: :first) }.to change(Card, :count).by(-1)
     end
   end
 
