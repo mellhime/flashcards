@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    errors:
+      models:
+        card:
+          attributes:
+            image_url:
+              url: is not a valid URL
   user_sessions:
     new:
       login: Login
@@ -86,7 +93,7 @@ en:
       create_pack: Create pack
   oauths:
     callback:
-      success: "Logged in!"
+      success: Logged in!
       danger: "Failed to login!"
   layouts:
     application:
@@ -104,3 +111,5 @@ en:
       google_login: Login from Google
       language: Change language
       notice: Please login
+  interactors:
+    misprint: "You have misprint: %{context.user_text}. Word: %{context.card.original_text} - %{context.card.translated_text}"

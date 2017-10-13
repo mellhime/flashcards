@@ -2,12 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true, with: :exception
   before_action :require_login, except: [:not_authenticated]
   before_action :set_locale
- 
-  private
 
-  def default_url_options
-    { locale: I18n.locale }
-  end
+  private
 
   def set_locale
     I18n.locale = if current_user

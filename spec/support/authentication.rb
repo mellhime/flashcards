@@ -3,8 +3,8 @@ module TestHelpers
     def login_user(email, password)
       visit login_path
 
-      fill_in 'Email',    with: email
-      fill_in 'Password', with: password
+      fill_in 'email',    with: email
+      fill_in 'password', with: password
 
       click_button 'Login'
     end

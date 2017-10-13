@@ -28,7 +28,8 @@
               <li><%= link_to "#{t '.login'}", login_path %></li>
               <li><%= link_to "#{t '.vk_login'}", auth_at_provider_path(:provider => :vk) %></li>
               <li><%= link_to "#{t '.google_login'}", auth_at_provider_path(:provider => :google) %></li>
-              <li><%= link_to "#{t '.language'}", change_language_path %></li>
+              <li><%= link_to 'en', login_path(locale: 'en') %></li>
+              <li><%= link_to 'ru', login_path(locale: 'ru') %></li>
             <% end %>
           </ul>
         </div>

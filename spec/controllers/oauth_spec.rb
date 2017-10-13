@@ -8,14 +8,14 @@ RSpec.describe OauthsController do
       session[:user_id] = user.id
       get :callback, params: { provider: 'google', code: '123' }
 
-      expect(flash[:notice]).to be_present
+      expect(flash[:success]).to be_present
     end
 
     it 'displays an error if user is not logged in and their google account is not linked' do
       OauthsController.any_instance.should_receive(:login_from).and_return(false)
 
       get :callback, params: { provider: 'google', code: '123' }
-      expect(flash[:alert]).to be_present
+      expect(flash[:danger]).to be_present
     end
 
     xit 'should create user' do

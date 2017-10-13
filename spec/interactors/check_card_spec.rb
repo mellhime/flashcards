@@ -31,7 +31,7 @@ describe CheckCard do
 
   it ".call should check card and fail if not valid and detect misprints" do
     interactor = CheckCard.call(user_text: "Valdi", card: card, session: session)
-    expect(interactor.message).to eq("Вы опечатались: #{interactor.user_text}. Слово: #{interactor.card.original_text} - #{interactor.card.translated_text}")
+    expect(interactor.message).to eq("You have misprint: %{context.user_text}. Word: %{context.card.original_text} - %{context.card.translated_text}")
     expect(interactor).to be_a_failure
   end
 end

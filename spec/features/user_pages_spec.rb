@@ -10,8 +10,8 @@ describe "User pages" do
       visit users_path
     end
 
-    it { should have_title('Все юзеры') }
-    it { should have_content('Все юзеры') }
+    it { should have_title('All users') }
+    it { should have_content('All Users') }
 
     it "should list each user" do
       User.all.each do |user|
@@ -36,8 +36,8 @@ describe "User pages" do
   describe "signup page" do
     before { visit new_user_path }
 
-    it { should have_content('Новый пользователь') }
-    it { should have_title('Новый пользователь') }
+    it { should have_content('New User') }
+    it { should have_title('New user') }
   end
 
   describe "signup page" do
@@ -53,17 +53,17 @@ describe "User pages" do
       describe "after submission" do
         before { click_button submit }
 
-        it { should have_title('Новый пользователь') }
+        it { should have_title('New user') }
         it { should have_content('errors') }
       end
     end
 
     describe "with valid information" do
       before do
-        fill_in "Name",         with: "ExampleUser"
-        fill_in "Email",        with: "user@example.com"
-        fill_in "Password",     with: "foobar"
-        fill_in "Password confirmation", with: "foobar"
+        fill_in "Name", with: "ExampleUser"
+        fill_in "user_email", with: "user@example.com"
+        fill_in "user_password", with: "foobar"
+        fill_in "user_password_confirmation", with: "foobar"
       end
 
       it "should create a user" do
@@ -92,16 +92,16 @@ describe "User pages" do
     end
 
     describe "page" do
-      it { should have_content("Редактирование юзера") }
-      it { should have_title("Редактирование юзера") }
+      it { should have_content("Edit profile") }
+      it { should have_title("Edit profile") }
     end
 
     describe "with invalid information" do
       before do
-        fill_in "Name",         with: "AnotherName"
-        fill_in "Email",        with: "another_email@example.com"
-        fill_in "Password",     with: valid_password
-        fill_in "Password confirmation", with: invalid_password
+        fill_in "Name", with: "AnotherName"
+        fill_in "user_email", with: "another_email@example.com"
+        fill_in "user_password", with: valid_password
+        fill_in "user_password_confirmation", with: invalid_password
         click_button "Update User"
       end
 
@@ -112,10 +112,10 @@ describe "User pages" do
       let(:new_name)  { "NewName" }
       let(:new_email) { "new@example.com" }
       before do
-        fill_in "Name",             with: new_name
-        fill_in "Email",            with: new_email
-        fill_in "Password",         with: valid_password
-        fill_in "Password confirmation", with: valid_password
+        fill_in "Name", with: new_name
+        fill_in "user_email", with: new_email
+        fill_in "user_password", with: valid_password
+        fill_in "user_password_confirmation", with: valid_password
         click_button "Update User"
       end
 
@@ -124,6 +124,26 @@ describe "User pages" do
       it { should have_link('Logout', href: logout_path) }
       it { expect(user.reload.name).to  eq new_name }
       it { expect(user.reload.email).to eq new_email }
+    end
+  end
+
+  describe "user can change locale" do
+    let(:user) { create(:user) }
+    let(:valid_password) { 'foobar' }
+
+    before do
+      login_user(user.email, valid_password)
+      visit edit_user_path(user)
+      fill_in "user_name", with: "ExampleUser"
+      fill_in "user_email", with: "user@example.com"
+      fill_in "user_password", with: "foobar"
+      fill_in "user_password_confirmation", with: "foobar"
+      select "en", from: "user[locale]"
+      click_button "Update User"
+    end
+
+    it "change locale" do
+      expect(I18n.locale).to eq(:en)
     end
   end
 end

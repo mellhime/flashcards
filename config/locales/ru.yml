@@ -1,4 +1,11 @@
 ru:
+  activerecord:
+    errors:
+      models:
+        card:
+          attributes:
+            image_url:
+              url: неверный URL
   user_sessions:
     new:
       login: Вход
@@ -102,3 +109,5 @@ ru:
       google_login: Вход через Google
       language: Смена языка
       notice: Залогиньтесь
+  interactors:
+    misprint: "Вы опечатались: %{context.user_text}. Слово: %{context.card.original_text} - %{context.card.translated_text}"

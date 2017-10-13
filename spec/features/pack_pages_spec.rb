@@ -6,7 +6,7 @@ describe "Pack pages" do
   let(:user) { create(:user) }
   let(:pack) { create(:pack, user_id: user.id) }
   let(:valid_password) { 'foobar' }
-  after(:all) { User.delete_all }
+  #after(:all) { User.delete_all }
 
   describe "index page" do
     before do
@@ -16,11 +16,11 @@ describe "Pack pages" do
       visit packs_path
     end
 
-    it { should have_content('Все колоды') }
-    it { should have_title('Все колоды') }
-    it { should have_link('edit') }
-    it { should have_link('show') }
-    it { should have_link('delete') }
+    it { should have_content('All packs') }
+    it { should have_title('All packs') }
+    it { should have_link('Edit') }
+    it { should have_link('Show') }
+    it { should have_link('Delete') }
 
     it "should list each pack" do
       Pack.all.each do |pack|
@@ -46,8 +46,8 @@ describe "Pack pages" do
     end
 
     describe "page" do
-      it { should have_content("Новая колода") }
-      it { should have_title("Новая колода") }
+      it { should have_content("New pack") }
+      it { should have_title("New pack") }
     end
 
     let(:submit) { "Create Pack" }
@@ -77,8 +77,8 @@ describe "Pack pages" do
     end
 
     describe "page" do
-      it { should have_content("Редактирование") }
-      it { should have_title("Редактирование") }
+      it { should have_content("Edit") }
+      it { should have_title("Edit") }
     end
 
     describe "with invalid information" do
@@ -117,9 +117,9 @@ describe "Pack pages" do
       visit packs_path
     end
 
-    it { should have_link('delete') }
+    it { should have_link('Delete') }
     it "should be able to delete pack" do
-      expect { click_link('delete', match: :first) }.to change(Pack, :count).by(-1)
+      expect { click_link('Delete', match: :first) }.to change(Pack, :count).by(-1)
     end
   end
 end

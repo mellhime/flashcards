@@ -50,9 +50,9 @@ class CardsController < ApplicationController
     result = CheckCard.call(user_text: params[:user_text], card: @card, session: session)
 
     if result.success?
-      flash[:success] = t('.success')
+      flash[:success] = result.message
     else
-      flash[:danger] = t('.danger')
+      flash[:danger] = result.message
     end
     redirect_to root_path
   end

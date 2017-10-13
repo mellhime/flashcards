@@ -43,11 +43,6 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def change_locale
-    I18n.locale = I18n.locale == :ru ? :en : :ru
-    redirect_to root_path
-  end
-
   private
 
   def user_params
