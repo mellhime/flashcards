@@ -14,7 +14,7 @@
       </div>
     <% end %>
   <div class="field">
-    <%= f.label :name%><br/>
+    <%= f.label :name %><br/>
     <%= f.text_field :name %>
   </div>
   <div class="field">
@@ -28,6 +28,9 @@
   <div class="field">
     <%= f.label :password_confirmation %><br/>
     <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.input :locale, collection: @locales %>
   </div>
   <div class="actions">
     <%= f.button :submit, class: "btn btn-large btn-primary"%>

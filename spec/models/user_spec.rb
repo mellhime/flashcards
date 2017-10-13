@@ -3,7 +3,7 @@ require 'rails_helper'
 describe User do
   let(:user) { create(:user) }
 
-  after(:all) { User.delete_all }
+  # after(:all) { User.delete_all }
 
   subject { user }
 
@@ -12,6 +12,9 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:cards) }
+  it { should respond_to(:packs) }
+  it { should respond_to(:current_pack) }
+  it { should respond_to(:locale) }
 
   it { should be_valid }
 
@@ -98,6 +101,21 @@ describe User do
 
     it "should have packs" do
       expect(user.packs.to_a).to eq [first_pack, second_pack]
+    end
+  end
+
+  describe "setting user's locale" do
+    it "should be from user.locale" do
+      expect(I18n.locale).to eq(user.locale.to_sym)
+    end
+  end
+
+  describe "scope has_unreviewed_cards" do
+    let(:card) { create(:card, user: user) }
+
+    it "should show user's unreviewed cards" do
+      card.update_attributes(review_date: Date.today - 2.days)
+      User.has_unreviewed_cards.should include(user)
     end
   end
 end

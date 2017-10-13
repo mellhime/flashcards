@@ -16,11 +16,11 @@ describe "Card pages" do
       visit cards_path
     end
 
-    it { should have_content('Все карточки') }
-    it { should have_title('Все карточки') }
-    it { should have_link('edit') }
-    it { should have_link('show') }
-    it { should have_link('delete') }
+    it { should have_content('All cards') }
+    it { should have_title('All cards') }
+    it { should have_link('Edit') }
+    it { should have_link('Show') }
+    it { should have_link('Delete') }
 
     it "should list each card" do
       Card.all.each do |card|
@@ -51,7 +51,7 @@ describe "Card pages" do
     end
 
     describe "page" do
-      it { should have_link("Создать колоду") }
+      it { should have_link("Create pack") }
       it { should have_field("Image") }
     end
 
@@ -65,8 +65,8 @@ describe "Card pages" do
 
     describe "with valid information" do
       before do
-        fill_in "Original text", with: "Example"
-        fill_in "Translated text", with: "Пример"
+        fill_in "card_original_text", with: "Example"
+        fill_in "card_translated_text", with: "Пример"
         select "Example", from: "card[pack_id]"
       end
 
@@ -77,9 +77,9 @@ describe "Card pages" do
 
     describe "when image uploaded via URL" do
       before do
-        fill_in "Original text", with: "Example"
-        fill_in "Translated text", with: "Пример"
-        fill_in "Enter a URL", with: "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+        fill_in "card_original_text", with: "Example"
+        fill_in "card_translated_text", with: "Пример"
+        fill_in "card_image_url", with: "https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
         select "Example", from: "card[pack_id]"
         click_button submit
       end
@@ -89,8 +89,8 @@ describe "Card pages" do
 
     describe "when image uploaded via file" do
       before do
-        fill_in "Original text", with: "Example"
-        fill_in "Translated text", with: "Пример"
+        fill_in "card_original_text", with: "Example"
+        fill_in "card_translated_text", with: "Пример"
         select "Example", from: "card[pack_id]"
         attach_file :card_image, 'spec/support/fixtures/image.jpg'
         click_button submit
@@ -111,16 +111,16 @@ describe "Card pages" do
     end
 
     describe "page" do
-      it { should have_content("Редактирование") }
-      it { should have_title("Редактирование") }
+      it { should have_content("Edit") }
+      it { should have_title("Edit") }
     end
 
     describe "with valid information" do
       let(:new_orig_text)  { "NewExample" }
       let(:new_trans_text) { "НовыйПример" }
       before do
-        fill_in "Original text", with: new_orig_text
-        fill_in "Translated text", with: new_trans_text
+        fill_in "card_original_text", with: new_orig_text
+        fill_in "card_translated_text", with: new_trans_text
         select "Example", from: "card[pack_id]"
         click_button "Update Card"
       end
@@ -134,8 +134,8 @@ describe "Card pages" do
       let(:new_orig_text)  { "NewExample" }
       let(:new_trans_text) { "NewExample" }
       before do
-        fill_in "Original text", with: new_orig_text
-        fill_in "Translated text", with: new_trans_text
+        fill_in "card_original_text", with: new_orig_text
+        fill_in "card_translated_text", with: new_trans_text
         select "Example", from: "card[pack_id]"
         click_button "Update Card"
       end
@@ -153,9 +153,9 @@ describe "Card pages" do
       visit cards_path
     end
 
-    it { should have_link('delete') }
+    it { should have_link('Delete') }
     it "should be able to delete card" do
-      expect{click_link('delete', match: :first)}.to change(Card, :count).by(-1)
+      expect { click_link('Delete', match: :first) }.to change(Card, :count).by(-1)
     end
   end
 
@@ -175,7 +175,7 @@ describe "Card pages" do
         click_button "Check"
       end
 
-      it { expect(page).to have_content('Правильно!') }
+      it { expect(page).to have_content("You're right!") }
       it { expect(page).to have_content(second_card.translated_text) }
     end
 
@@ -185,8 +185,24 @@ describe "Card pages" do
         click_button "Check"
       end
 
-      it { expect(page).to have_content('Неправильно!') }
+      it { expect(page).to have_content("You're not right!") }
       it { expect(page).to have_content(card.translated_text) }
+
+      describe "3 times" do
+        before do
+          fill_in :user_text, with: "Invalid"
+          click_button "Check"
+          fill_in :user_text, with: "Invalid"
+          click_button "Check"
+          fill_in :user_text, with: "Invalid"
+          click_button "Check"
+          fill_in :user_text, with: "Invalid"
+          click_button "Check"
+        end
+
+        it { expect(page).to have_content("You're not right!") }
+        xit { expect(page).not_to have_content(card.translated_text) }
+      end
     end
 
     describe "when there are no cards to review" do
@@ -196,7 +212,7 @@ describe "Card pages" do
       end
 
       it { expect(current_path).to eql(cards_path) }
-      it { expect(page).to have_content('Нет карточек для проверки!') }
+      it { expect(page).to have_content('No cards to review') }
     end
   end
 

@@ -4,5 +4,6 @@ FactoryGirl.define do
     sequence(:email) { |n| "person_#{n}@example.com" }
     password "foobar"
     password_confirmation "foobar"
+    locale :en
   end
 end

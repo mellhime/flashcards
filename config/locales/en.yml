@@ -1,33 +1,115 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        card:
+          attributes:
+            image_url:
+              url: is not a valid URL
+  user_sessions:
+    new:
+      login: Login
+      email: E-mail
+      password: Password
+    form:
+      email: E-mail
+      password: Password
+      login: Login
+    create:
+      success: Login successful
+      danger: Failed login
+    destroy:
+      notice: Logged out!
+  users:
+    new:
+      new_user: New User
+    edit:
+      edit_user: Edit User
+    index:
+      all_users: All Users
+    show:
+      name: Name
+      email: E-mail
+      edit: Edit
+      delete: Delete
+      confirmation: You sure?
+    create:
+      success: Welcome to the Flashcarder
+    update:
+      success: Successfully updated
+  packs:
+    new:
+      new_pack: New pack
+    edit:
+      edit_pack: Edit pack
+    index:
+      all_packs: All packs
+      count: Count of cards
+      name: Name
+      show: Show
+      edit: Edit
+      delete: Delete
+      confirmation: You sure?
+    show:
+      name: Name
+      review_date: Review date
+      original_text: Word
+      translated_text: Translation
+      show: Show
+      edit: Edit
+      delete: Delete
+      confirmation: You sure?
+    form:
+      current: Make current?
+  cards:
+    new:
+      new_card: New card
+    edit:
+      edit_card: Edit card
+    random:
+      check: Check
+      next_card: Next card
+      danger: No cards to review
+    check:
+      success: You're right!
+      danger: You're not right!
+    index:
+      all_cards: All packs
+      count: Count of reviews
+      original_text: Word
+      translated_text: Translation
+      review_date: Review date
+      pack: Pack
+      show: Show
+      edit: Edit
+      delete: Delete
+      confirmation: You sure?
+    show:
+      original_text: Word
+      translated_text: Translation
+      image: Image
+      pack: Pack
+    form:
+      create_pack: Create pack
+  oauths:
+    callback:
+      success: Logged in!
+      danger: "Failed to login!"
+  layouts:
+    application:
+      title: Flashcarder
+      main: Main page
+      all_cards: All cards
+      new_card: New card
+      edit_profile: Edit profile
+      logout: Logout
+      add_pack: Add pack
+      all_packs: All packs
+      register: Registration
+      login: Login
+      vk_login: Login from vk
+      google_login: Login from Google
+      language: Change language
+      notice: Please login
+  interactors:
+    misprint: "You have misprint: %{user_text}. Word: %{card.original_text} - %{card.translated_text}"

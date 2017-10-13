@@ -42,7 +42,7 @@ class CardsController < ApplicationController
 
   def random
     return @card unless @card.nil?
-    flash[:danger] = "Нет карточек для проверки!"
+    flash[:danger] = t('.danger')
     redirect_to cards_path
   end
 

@@ -3,7 +3,7 @@
   <p><%= image_tag(@card.image.url(:thumb)) if @card.image.exists? %></p>
   <%= form_tag check_card_path(@card) do |f| %>
     <p><%= text_field_tag :user_text %></p>
-    <p><%= button_tag 'Check' %></p>
+    <p><%= button_tag "#{t '.check'}" %></p>
   <% end %>
 </div>
-<p><%= link_to "Следующая карточка", root_path %></p>
+<p><%= link_to "#{t '.next_card'}", root_path %></p>

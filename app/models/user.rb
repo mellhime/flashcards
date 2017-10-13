@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   has_many :cards, dependent: :destroy
   has_many :packs, dependent: :destroy
+  has_many :authentications, dependent: :destroy
   belongs_to :current_pack, class_name: 'Pack', optional: true
+
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end
 
-  has_many :authentications, :dependent => :destroy
   accepts_nested_attributes_for :authentications
 
   before_save { email.downcase! }

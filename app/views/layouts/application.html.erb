@@ -12,33 +12,27 @@
       <nav class="navbar navbar-default" role="navigation">
 
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Флэшкарточкер</a>
+          <a class="navbar-brand" href="#"><%= t '.title' %></a>
           <ul class="nav navbar-nav">
-            <li><%= link_to "Главная", root_path %></li>
+            <li><%= link_to "#{t '.main'}", root_path %></li>
             <% if current_user %>
-              <li><%= link_to "Все карточки", cards_path %></li>
-              <li><%= link_to "Добавить карточку", new_card_path %></li>
-              <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
-              <li><%= link_to "Logout", logout_path, method: :delete %></li>
-              <li><%= link_to "Добавить колоду", new_pack_path %></li>
-              <li><%= link_to "Все колоды", packs_path %></li>
+              <li><%= link_to "#{t '.all_cards'}", cards_path %></li>
+              <li><%= link_to "#{t '.new_card'}", new_card_path %></li>
+              <li><%= link_to "#{t '.edit_profile'}", edit_user_path(current_user.id) %></li>
+              <li><%= link_to "#{t '.logout'}", logout_path, method: :delete %></li>
+              <li><%= link_to "#{t '.add_pack'}", new_pack_path %></li>
+              <li><%= link_to "#{t '.all_packs'}", packs_path %></li>
 
             <% else %>
-              <li><%= link_to "Register", new_user_path %></li>
-              <li><%= link_to "Login", login_path %></li>
-              <li><%= link_to 'Login with VK', auth_at_provider_path(:provider => :vk) %></li>
-              <li><%= link_to 'Login with Google', auth_at_provider_path(:provider => :google) %></li>
+              <li><%= link_to "#{t '.register'}", new_user_path %></li>
+              <li><%= link_to "#{t '.login'}", login_path %></li>
+              <li><%= link_to "#{t '.vk_login'}", auth_at_provider_path(:provider => :vk) %></li>
+              <li><%= link_to "#{t '.google_login'}", auth_at_provider_path(:provider => :google) %></li>
+              <li><%= link_to 'en', login_path(locale: 'en') %></li>
+              <li><%= link_to 'ru', login_path(locale: 'ru') %></li>
             <% end %>
           </ul>
         </div>
-        <% if current_user %>
-          <div>
-            <p class="navbar-text navbar-right">Signed in as
-              <a href="#" class="navbar-link"><%= current_user.name %></a>
-            </p>
-          </div>
-        <% end %>
-
       </nav>
     </header>
 
