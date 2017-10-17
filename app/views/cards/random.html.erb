@@ -1,24 +1,4 @@
-<script type="text/javascript">
-  function func1() {
-    var result = 5;
-    document.getElementById('score').value = result;
-  }
-
-  function func2() {
-    var result = 4;
-    document.getElementById('score').value = result;
-  }
-
-  function func3() {
-    var result = 3;
-    document.getElementById('score').value = result;
-  }
-
-  setTimeout(func1, 5000);
-  setTimeout(func2, 10000);
-  setTimeout(func3, 60000);
-</script>
-<!-- здесь я даю оценку ответу юзера в зависимости от затраченного времени: до 5 сек - 5, от 10 до 60 сек - 4, больше 60 сек - 3 -->
+<%= javascript_include_tag 'score' %>
 <div class="col-xs-3">
   <h2><%= @card.translated_text %></h2>
   <p><%= image_tag(@card.image.url(:thumb)) if @card.image.exists? %></p>
