@@ -6,7 +6,7 @@ describe "Card pages" do
   let(:user) { create(:user) }
   let(:pack) { create(:pack, user_id: user.id) }
   let(:card) { create(:card, user_id: user.id) }
-  let(:valid_password) { 'foobar' }
+  let(:valid_password) { "foobar" }
 
   describe "index page" do
     before do
