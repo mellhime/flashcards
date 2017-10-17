@@ -172,6 +172,7 @@ describe "Card pages" do
     describe "with valid translation" do
       before do
         fill_in :user_text, with: card.original_text
+        find("#seconds", visible: false).set(1)
         click_button "Check"
       end
 
@@ -179,7 +180,7 @@ describe "Card pages" do
       it { expect(page).to have_content(second_card.translated_text) }
     end
 
-    describe "with ivalid translation" do
+    describe "with invalid translation" do
       before do
         fill_in :user_text, with: "Invalid"
         click_button "Check"
@@ -187,22 +188,6 @@ describe "Card pages" do
 
       it { expect(page).to have_content("You're not right!") }
       it { expect(page).to have_content(card.translated_text) }
-
-      describe "3 times" do
-        before do
-          fill_in :user_text, with: "Invalid"
-          click_button "Check"
-          fill_in :user_text, with: "Invalid"
-          click_button "Check"
-          fill_in :user_text, with: "Invalid"
-          click_button "Check"
-          fill_in :user_text, with: "Invalid"
-          click_button "Check"
-        end
-
-        it { expect(page).to have_content("You're not right!") }
-        xit { expect(page).not_to have_content(card.translated_text) }
-      end
     end
 
     describe "when there are no cards to review" do
