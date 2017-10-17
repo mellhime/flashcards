@@ -1,12 +1,15 @@
 class CheckCard
   include Interactor
 
+  SCORE = { 1..15 => 5, 16..60 => 4, 61..Float::INFINITY => 3 }
+
   def call
     if context.user_text == context.card.original_text
-      context.card.review_status += 1 # переименовала check_count на review_status
-      context.card.easiness_factor += (0.1 - (5 - context.score.to_i) * (0.08 + (5 - context.score.to_i) * 0.02))
-      context.message = I18n.t('cards.check.success')  
-    else # в случае неправильного ответа нам вообще не нужна оценка качества ответа (score), т.к. если качество ответа меньше 3: интервал проверки возвращается к самому началу
+      score = SCORE.select { |k,v| k.include?(context.seconds.to_i) }.values.first
+      context.card.review_status += 1
+      context.card.easiness_factor += (0.1 - (5 - score) * (0.08 + (5 - score) * 0.02))
+      context.message = I18n.t('cards.check.success')
+    else
       distance = DamerauLevenshtein.distance(context.user_text, context.card.original_text)
       return context.fail!(message: I18n.t('interactors.misprint')) if distance <= 2
 
@@ -18,11 +21,11 @@ class CheckCard
                               1
                             elsif context.card.review_status == 2
                               6
-                            else # если карточка показывается больше чем 2-ой раз, её интервал показа вычисляется путем умножения предыдущего интервала на EF
+                            else
                               context.card.interval * context.card.easiness_factor
                             end
                             
-    context.card.review_date = Time.current + context.card.interval.days # обновляем дату проверки с учетом вычисленного интервала
+    context.card.review_date = Time.current + context.card.interval.days
     context.card.save
   end
 end

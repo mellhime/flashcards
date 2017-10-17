@@ -47,7 +47,7 @@ class CardsController < ApplicationController
   end
 
   def check
-    result = CheckCard.call(user_text: params[:user_text], card: @card, score: params[:score])
+    result = CheckCard.call(user_text: params[:user_text], card: @card, seconds: params[:seconds])
 
     if result.success?
       flash[:success] = result.message

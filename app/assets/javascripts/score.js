@@ -1,7 +1,7 @@
-  function func1(returnValue) {
-    document.getElementById('score').value = returnValue;
-  }
+var seconds=0;
+setInterval(timer, 1000);
 
-  setTimeout(func1(5), 5000);
-  setTimeout(func1(4), 10000);
-  setTimeout(func1(3), 60000);
+function timer() {
+  seconds += 1;
+  document.getElementById('seconds').value = seconds;
+}
