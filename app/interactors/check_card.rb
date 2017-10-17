@@ -19,7 +19,7 @@ class CheckCard
       context.card.review_date = Time.current + context.card.interval.days
       context.card.save
 
-      context.message = I18n.t('cards.check.success')      
+      context.message = I18n.t('cards.check.success')
     else
       distance = DamerauLevenshtein.distance(context.user_text, context.card.original_text)
       return context.fail!(message: I18n.t('interactors.misprint')) if distance <= 2
@@ -29,6 +29,6 @@ class CheckCard
       context.card.save
 
       context.fail!(message: I18n.t('cards.check.danger'))
-    end 
+    end
   end
 end

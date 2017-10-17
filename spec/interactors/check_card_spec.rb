@@ -21,7 +21,7 @@ describe CheckCard do
 
     it "should calculate interval and review date" do
       expect(interactor.card.interval).to eq(6)
-      expect(interactor.card.review_date.change(:sec => 0)).to eq((Time.current + interactor.card.interval.days).change(:sec => 0))
+      expect(interactor.card.review_date.change(sec: 0)).to eq((Time.current + interactor.card.interval.days).change(sec: 0))
     end
   end
 
@@ -29,7 +29,7 @@ describe CheckCard do
     let(:seconds) { 99 }
     let(:interactor) { CheckCard.call(user_text: invalid_params, card: card, seconds: seconds) }
 
-    it "easiness_factor should be the same"  do
+    it "easiness_factor should be the same" do
       expect(interactor.card.easiness_factor).to eq(2.5)
     end
 
@@ -40,7 +40,7 @@ describe CheckCard do
 
     it "its interval should be 1 day" do
       expect(interactor.card.interval).to eq(1)
-      expect(interactor.card.review_date.change(:sec => 0)).to eq((Time.current + interactor.card.interval.days).change(:sec => 0))
+      expect(interactor.card.review_date.change(sec: 0)).to eq((Time.current + interactor.card.interval.days).change(sec: 0))
     end
 
     it ".call should check card and fail if not valid and detect misprints" do
