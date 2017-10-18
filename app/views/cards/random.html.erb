@@ -3,6 +3,7 @@
   <p><%= image_tag(@card.image.url(:thumb)) if @card.image.exists? %></p>
   <%= form_tag check_card_path(@card) do |f| %>
     <p><%= text_field_tag :user_text %></p>
+    <p><%= hidden_field_tag :seconds %></p>
     <p><%= button_tag "#{t '.check'}" %></p>
   <% end %>
 </div>

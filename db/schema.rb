@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011162423) do
+ActiveRecord::Schema.define(version: 20171015140903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,9 @@ ActiveRecord::Schema.define(version: 20171011162423) do
     t.datetime "image_updated_at"
     t.string "image_url"
     t.integer "pack_id"
-    t.integer "check_count", default: 0
+    t.integer "review_status", default: 0
+    t.float "easiness_factor", default: 2.5
+    t.integer "interval", default: 0
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
