@@ -8,7 +8,7 @@ RSpec.describe CardsMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("You have cards to review")
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(["notifications@example.com"])
+      expect(mail.from).to eq(["postmaster@mg.flashcarder.com"])
     end
 
     it "renders the body" do
