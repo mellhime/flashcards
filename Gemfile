@@ -39,6 +39,7 @@ gem 'damerau-levenshtein'
 gem 'whenever', require: false
 gem 'http_accept_language'
 gem 'rollbar'
+gem 'newrelic_rpm'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
