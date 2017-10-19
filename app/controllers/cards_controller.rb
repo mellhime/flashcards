@@ -1,6 +1,5 @@
 class CardsController < ApplicationController
   before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
-  before_action :choose_card, only: [:random]
 
   def index
     @cards = current_user.cards
@@ -41,6 +40,7 @@ class CardsController < ApplicationController
   end
 
   def random
+    choose_card
     return @card unless @card.nil?
     flash[:danger] = t('.danger')
     redirect_to cards_path
@@ -48,13 +48,11 @@ class CardsController < ApplicationController
 
   def check
     result = CheckCard.call(user_text: params[:user_text], card: @card, seconds: params[:seconds])
-
-    if result.success?
-      flash[:success] = result.message
-    else
-      flash[:danger] = result.message
+    choose_card
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js { flash.now[:info] = result.message }
     end
-    redirect_to root_path
   end
 
   private
@@ -68,7 +66,6 @@ class CardsController < ApplicationController
   end
 
   def choose_card
-    scope = current_user.current_pack.nil? ? current_user : current_user.current_pack
-    @card = scope.cards.random_card_to_review.first
+    @card = Card.random_card(current_user)
   end
 end
