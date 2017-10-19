@@ -90,6 +90,8 @@ en:
       pack: Pack
     random_form:
       check: Check
+    form:
+      create_pack: Create pack
   oauths:
     callback:
       success: Logged in!
