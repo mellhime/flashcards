@@ -4,13 +4,10 @@ setInterval(timer, 1000);
 function timer() {
   seconds += 1;
   document.getElementById('seconds').value = seconds;
-}
+};
 
-$('#check-form').submit(function(e) {
-    e.preventDefault();
-    this.submit();
-
+function onClickFunc() {
     setTimeout(function(){
         seconds = 0;
     }, 100);
-});
+ };
