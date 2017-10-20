@@ -29,6 +29,6 @@ class Card < ApplicationRecord
 
   def self.random_card(current_user)
     scope = current_user.current_pack.nil? ? current_user : current_user.current_pack
-    card = scope.cards.random_card_to_review.first
+    scope.cards.random_card_to_review.first
   end
 end
