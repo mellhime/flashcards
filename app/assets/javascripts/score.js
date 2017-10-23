@@ -8,4 +8,4 @@ function timer() {
 
 function restartTimer() {
   seconds = 0;
- }
+}
