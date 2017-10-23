@@ -176,7 +176,7 @@ describe "Card pages" do
         click_button "Check"
       end
 
-      xit { expect(page).to have_content("You're right!") }
+      it { expect(page).to have_selector('div#notice') }
       it { expect(page).to have_content(second_card.translated_text) }
     end
 
@@ -186,7 +186,7 @@ describe "Card pages" do
         click_button "Check"
       end
 
-      xit { expect(page).to have_content("You're not right!") }
+      it { expect(page).to have_selector('div#notice') }
       it { expect(page).to have_content(card.translated_text) }
     end
 
