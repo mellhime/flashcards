@@ -26,9 +26,4 @@ class Card < ApplicationRecord
   def download_remote_image
     self.image = URI.parse(image_url).to_s
   end
-
-  def self.random_card(current_user)
-    scope = current_user.current_pack.nil? ? current_user : current_user.current_pack
-    scope.cards.random_card_to_review.first
-  end
 end
