@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
+  before_action :choose_card, only: [:random]
 
   def index
     @cards = current_user.cards
@@ -40,7 +41,6 @@ class CardsController < ApplicationController
   end
 
   def random
-    choose_card
     return @card unless @card.nil?
     flash[:danger] = t('.danger')
     redirect_to cards_path
@@ -66,6 +66,6 @@ class CardsController < ApplicationController
   end
 
   def choose_card
-    @card = Card.random_card(current_user)
+    @card = User.random_card(current_user)
   end
 end

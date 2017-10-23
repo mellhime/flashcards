@@ -6,8 +6,6 @@ function timer() {
   document.getElementById('seconds').value = seconds;
 }
 
-function onClickFunc() {
-    setTimeout(function(){
-        seconds = 0;
-    }, 100);
+function restartTimer() {
+  seconds = 0;
  }

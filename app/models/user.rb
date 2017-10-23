@@ -18,4 +18,9 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   scope :has_unreviewed_cards, -> { joins(:cards).where('cards.review_date <= ?', Date.today).uniq }
+
+  def self.random_card(current_user)
+    scope = current_user.current_pack.nil? ? current_user : current_user.current_pack
+    scope.cards.random_card_to_review.first
+  end
 end

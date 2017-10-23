@@ -4,6 +4,6 @@
   <%= form_tag(check_card_path(card), remote: true) do |f| %>
     <p><%= text_field_tag :user_text %></p>
     <p><%= hidden_field_tag :seconds %></p>
-    <p><%= button_tag "#{t '.check'}", onclick: 'onClickFunc()' %></p>
+    <p><%= button_tag "#{t '.check'}", onclick: 'restartTimer()' %></p>
   <% end %>
 </div>
