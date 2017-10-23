@@ -67,7 +67,6 @@ en:
     edit:
       edit_card: Edit card
     random:
-      check: Check
       next_card: Next card
       danger: No cards to review
     check:
@@ -89,6 +88,8 @@ en:
       translated_text: Translation
       image: Image
       pack: Pack
+    random_form:
+      check: Check
     form:
       create_pack: Create pack
   oauths:

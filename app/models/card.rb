@@ -15,10 +15,6 @@ class Card < ApplicationRecord
   validates_attachment :image, content_type: { content_type: %r{\Aimage\/.*\z} }
   validates :image_url, url: { allow_blank: true }
 
-  def create_review_date
-    self.review_date = Date.today + 3.days
-  end
-
   def equality_of_original_and_translated_texts
     errors.add(:translated_text, "can't be the same as original") if original_text.downcase == translated_text.downcase
   end

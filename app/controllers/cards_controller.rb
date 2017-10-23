@@ -48,13 +48,11 @@ class CardsController < ApplicationController
 
   def check
     result = CheckCard.call(user_text: params[:user_text], card: @card, seconds: params[:seconds])
-
-    if result.success?
-      flash[:success] = result.message
-    else
-      flash[:danger] = result.message
+    choose_card
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js { flash.now[:info] = result.message }
     end
-    redirect_to root_path
   end
 
   private
@@ -68,7 +66,6 @@ class CardsController < ApplicationController
   end
 
   def choose_card
-    scope = current_user.current_pack.nil? ? current_user : current_user.current_pack
-    @card = scope.cards.random_card_to_review.first
+    @card = User.random_card(current_user)
   end
 end

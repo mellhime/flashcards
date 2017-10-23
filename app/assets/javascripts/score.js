@@ -5,3 +5,7 @@ function timer() {
   seconds += 1;
   document.getElementById('seconds').value = seconds;
 }
+
+function restartTimer() {
+  seconds = 0;
+}

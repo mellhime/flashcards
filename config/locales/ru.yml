@@ -67,7 +67,6 @@ ru:
     edit:
       edit_card: Редактировать
     random:
-      check: Проверить
       next_card: Следующая карточка
       danger: Нет карточек для проверки
     check:
@@ -89,6 +88,8 @@ ru:
       translated_text: Перевод
       image: Изображение
       pack: Колода
+    random_form:
+      check: Проверить
   oauths:
     callback:
       success: "Удачный вход!"
