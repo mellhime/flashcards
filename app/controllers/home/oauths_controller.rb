@@ -1,4 +1,4 @@
-class OauthsController < ApplicationController
+class Home::OauthsController < ApplicationController
   skip_before_action :require_login
 
   def oauth
@@ -9,17 +9,17 @@ class OauthsController < ApplicationController
     provider = auth_params[:provider]
     if @user = login_from(provider)
       flash[:success] = t('.success')
-      redirect_to users_path
+      redirect_to home_users_path
     else
       begin
         @user = create_from(provider)
         reset_session
         auto_login(@user)
         flash[:success] = t('.success')
-        redirect_to users_path
+        redirect_to home_users_path
       rescue
         flash[:danger] = t('.danger')
-        redirect_to users_path
+        redirect_to home_users_path
       end
     end
   end

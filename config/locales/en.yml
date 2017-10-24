@@ -6,96 +6,100 @@ en:
           attributes:
             image_url:
               url: is not a valid URL
-  user_sessions:
-    new:
-      login: Login
-      email: E-mail
-      password: Password
-    form:
-      email: E-mail
-      password: Password
-      login: Login
-    create:
-      success: Login successful
-      danger: Failed login
-    destroy:
-      notice: Logged out!
-  users:
-    new:
-      new_user: New User
-    edit:
-      edit_user: Edit User
-    index:
-      all_users: All Users
-    show:
-      name: Name
-      email: E-mail
-      edit: Edit
-      delete: Delete
-      confirmation: You sure?
-    create:
-      success: Welcome to the Flashcarder
-    update:
-      success: Successfully updated
-  packs:
-    new:
-      new_pack: New pack
-    edit:
-      edit_pack: Edit pack
-    index:
-      all_packs: All packs
-      count: Count of cards
-      name: Name
-      show: Show
-      edit: Edit
-      delete: Delete
-      confirmation: You sure?
-    show:
-      name: Name
-      review_date: Review date
-      original_text: Word
-      translated_text: Translation
-      show: Show
-      edit: Edit
-      delete: Delete
-      confirmation: You sure?
-    form:
-      current: Make current?
-  cards:
-    new:
-      new_card: New card
-    edit:
-      edit_card: Edit card
-    random:
-      next_card: Next card
-      danger: No cards to review
-    check:
-      success: You're right!
-      danger: You're not right!
-    index:
-      all_cards: All packs
-      count: Count of reviews
-      original_text: Word
-      translated_text: Translation
-      review_date: Review date
-      pack: Pack
-      show: Show
-      edit: Edit
-      delete: Delete
-      confirmation: You sure?
-    show:
-      original_text: Word
-      translated_text: Translation
-      image: Image
-      pack: Pack
-    random_form:
-      check: Check
-    form:
-      create_pack: Create pack
-  oauths:
-    callback:
-      success: Logged in!
-      danger: "Failed to login!"
+  home:
+    user_sessions:
+      new:
+        login: Login
+        email: E-mail
+        password: Password
+      form:
+        email: E-mail
+        password: Password
+        login: Login
+      create:
+        success: Login successful
+        danger: Failed login
+    users:
+      new:
+        new_user: New User
+      create:
+        success: Welcome to the Flashcarder
+      index:
+        all_users: All Users
+      edit:
+        edit_user: Edit User
+    oauths:
+      callback:
+        success: Logged in!
+        danger: "Failed to login!"
+  dashboard:
+    user_sessions:
+      destroy:
+        notice: Logged out!
+    users:
+      show:
+        name: Name
+        email: E-mail
+        edit: Edit
+        delete: Delete
+        confirmation: You sure?
+      update:
+        success: Successfully updated
+    packs:
+      new:
+        new_pack: New pack
+      edit:
+        edit_pack: Edit pack
+      index:
+        all_packs: All packs
+        count: Count of cards
+        name: Name
+        show: Show
+        edit: Edit
+        delete: Delete
+        confirmation: You sure?
+      show:
+        name: Name
+        review_date: Review date
+        original_text: Word
+        translated_text: Translation
+        show: Show
+        edit: Edit
+        delete: Delete
+        confirmation: You sure?
+      form:
+        current: Make current?
+    cards:
+      new:
+        new_card: New card
+      edit:
+        edit_card: Edit card
+      random:
+        next_card: Next card
+        danger: No cards to review
+      check:
+        success: You're right!
+        danger: You're not right!
+      index:
+        all_cards: All packs
+        count: Count of reviews
+        original_text: Word
+        translated_text: Translation
+        review_date: Review date
+        pack: Pack
+        show: Show
+        edit: Edit
+        delete: Delete
+        confirmation: You sure?
+      show:
+        original_text: Word
+        translated_text: Translation
+        image: Image
+        pack: Pack
+      random_form:
+        check: Check
+      form:
+        create_pack: Create pack
   layouts:
     application:
       title: Flashcarder

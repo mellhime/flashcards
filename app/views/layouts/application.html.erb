@@ -16,15 +16,15 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "#{t '.main'}", root_path %></li>
             <% if current_user %>
-              <li><%= link_to "#{t '.all_cards'}", cards_path %></li>
-              <li><%= link_to "#{t '.new_card'}", new_card_path %></li>
-              <li><%= link_to "#{t '.edit_profile'}", edit_user_path(current_user.id) %></li>
+              <li><%= link_to "#{t '.all_cards'}", dashboard_cards_path %></li>
+              <li><%= link_to "#{t '.new_card'}", new_dashboard_card_path %></li>
+              <li><%= link_to "#{t '.edit_profile'}", edit_dashboard_user_path(current_user.id) %></li>
               <li><%= link_to "#{t '.logout'}", logout_path, method: :delete %></li>
-              <li><%= link_to "#{t '.add_pack'}", new_pack_path %></li>
-              <li><%= link_to "#{t '.all_packs'}", packs_path %></li>
+              <li><%= link_to "#{t '.add_pack'}", new_dashboard_pack_path %></li>
+              <li><%= link_to "#{t '.all_packs'}", dashboard_packs_path %></li>
 
             <% else %>
-              <li><%= link_to "#{t '.register'}", new_user_path %></li>
+              <li><%= link_to "#{t '.register'}", new_home_user_path %></li>
               <li><%= link_to "#{t '.login'}", login_path %></li>
               <li><%= link_to "#{t '.vk_login'}", auth_at_provider_path(:provider => :vk) %></li>
               <li><%= link_to "#{t '.google_login'}", auth_at_provider_path(:provider => :google) %></li>

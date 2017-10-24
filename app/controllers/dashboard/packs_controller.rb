@@ -1,4 +1,4 @@
-class PacksController < ApplicationController
+class Dashboard::PacksController < ApplicationController
   before_action :find_pack, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -12,14 +12,14 @@ class PacksController < ApplicationController
   end
 
   def edit
-    redirect_to packs_path unless current_user.packs.include?(@pack)
+    redirect_to dashboard_packs_path unless current_user.packs.include?(@pack)
   end
 
   def create
     @pack = Pack.new(pack_params.merge(user_id: current_user.id))
     if @pack.save
       update_current_pack
-      redirect_to @pack
+      redirect_to dashboard_pack_path(@pack)
     else
       render 'new'
     end
@@ -28,7 +28,7 @@ class PacksController < ApplicationController
   def update
     if @pack.update_attributes(pack_params)
       update_current_pack
-      redirect_to @pack
+      redirect_to dashboard_pack_path(@pack)
     else
       render 'edit'
     end
@@ -36,7 +36,7 @@ class PacksController < ApplicationController
 
   def destroy
     @pack.destroy
-    redirect_to packs_path
+    redirect_to dashboard_packs_path
   end
 
   private

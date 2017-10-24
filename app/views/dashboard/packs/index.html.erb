@@ -17,9 +17,9 @@
         <tr>
           <td><%= pack.name %></td>
           <td><%= pack.cards.count %></td>
-          <td><%= link_to "#{t '.show'}", pack_path(pack) %></td>
-          <td><%= link_to "#{t '.edit'}", edit_pack_path(pack) %></td>
-          <td><%= link_to "#{t '.delete'}", pack_path(pack), method: :delete, data: { confirm:
+          <td><%= link_to "#{t '.show'}", dashboard_pack_path(pack) %></td>
+          <td><%= link_to "#{t '.edit'}", edit_dashboard_pack_path(pack) %></td>
+          <td><%= link_to "#{t '.delete'}", dashboard_pack_path(pack), method: :delete, data: { confirm:
             "#{t '.confirmation'}" } %></td>
         </tr>
       <% end %>

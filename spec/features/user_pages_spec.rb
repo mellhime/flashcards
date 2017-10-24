@@ -7,7 +7,7 @@ describe "User pages" do
     before do
       FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
       FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
-      visit users_path
+      visit home_users_path
     end
 
     it { should have_title('All users') }
@@ -26,7 +26,7 @@ describe "User pages" do
 
     before do
       login_user(user.email, valid_password)
-      visit user_path(user)
+      visit dashboard_user_path(user)
     end
 
     it { should have_content(user.name) }
@@ -34,14 +34,14 @@ describe "User pages" do
   end
 
   describe "signup page" do
-    before { visit new_user_path }
+    before { visit new_home_user_path }
 
     it { should have_content('New User') }
     it { should have_title('New user') }
   end
 
   describe "signup page" do
-    before { visit new_user_path }
+    before { visit new_home_user_path }
 
     let(:submit) { "Create User" }
 
@@ -88,7 +88,7 @@ describe "User pages" do
 
     before do
       login_user(user.email, valid_password)
-      visit edit_user_path(user)
+      visit edit_dashboard_user_path(user)
     end
 
     describe "page" do
@@ -102,7 +102,7 @@ describe "User pages" do
         fill_in "user_email", with: "another_email@example.com"
         fill_in "user_password", with: valid_password
         fill_in "user_password_confirmation", with: invalid_password
-        click_button "Update User"
+        click_button('Update User', match: :first)
       end
 
       it { should have_content('error') }
@@ -116,7 +116,7 @@ describe "User pages" do
         fill_in "user_email", with: new_email
         fill_in "user_password", with: valid_password
         fill_in "user_password_confirmation", with: valid_password
-        click_button "Update User"
+        click_button('Update User', match: :first)
       end
 
       it { should have_title(new_name) }
@@ -133,13 +133,13 @@ describe "User pages" do
 
     before do
       login_user(user.email, valid_password)
-      visit edit_user_path(user)
+      visit edit_dashboard_user_path(user)
       fill_in "user_name", with: "ExampleUser"
       fill_in "user_email", with: "user@example.com"
       fill_in "user_password", with: "foobar"
       fill_in "user_password_confirmation", with: "foobar"
       select "en", from: "user[locale]"
-      click_button "Update User"
+      find("#update_locale").click
     end
 
     it "change locale" do

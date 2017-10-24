@@ -1,27 +1,7 @@
-class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:index, :new, :create, :change_locale]
+class Dashboard::UsersController < ApplicationController
   before_action :find_user, only: [:show, :destroy]
 
   def show; end
-
-  def new
-    @user = User.new
-  end
-
-  def index
-    @users = User.all
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:success] = t('.success')
-      auto_login(@user)
-      redirect_to @user
-    else
-      render 'new'
-    end
-  end
 
   def edit
     @user = current_user
@@ -32,7 +12,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update_attributes(user_params)
       flash[:success] = t('.success')
-      redirect_to @user
+      redirect_to dashboard_user_path(@user)
     else
       render 'edit'
     end
@@ -40,7 +20,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to users_path
+    redirect_to home_users_path
   end
 
   private

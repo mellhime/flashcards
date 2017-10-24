@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class Dashboard::CardsController < ApplicationController
   before_action :find_card, only: [:show, :edit, :update, :destroy, :check]
   before_action :choose_card, only: [:random]
 
@@ -21,7 +21,7 @@ class CardsController < ApplicationController
   def create
     @card = Card.new(card_params.merge(user_id: current_user.id))
     if @card.save
-      redirect_to @card
+      redirect_to dashboard_card_path(@card)
     else
       render 'new'
     end
@@ -29,7 +29,7 @@ class CardsController < ApplicationController
 
   def update
     if @card.update_attributes(card_params)
-      redirect_to @card
+      redirect_to dashboard_card_path(@card)
     else
       render 'edit'
     end
@@ -37,13 +37,13 @@ class CardsController < ApplicationController
 
   def destroy
     @card.destroy
-    redirect_to cards_path
+    redirect_to dashboard_cards_path
   end
 
   def random
     return @card unless @card.nil?
     flash[:danger] = t('.danger')
-    redirect_to cards_path
+    redirect_to dashboard_cards_path
   end
 
   def check

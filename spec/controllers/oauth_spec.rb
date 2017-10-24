@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe OauthsController do
+RSpec.describe Home::OauthsController do
   describe "#callback" do
     it 'logs in a linked user' do
-      OauthsController.any_instance.should_receive(:login_from).with('google').and_return(Authentication.new)
+      Home::OauthsController.any_instance.should_receive(:login_from).with('google').and_return(Authentication.new)
       user = create(:user)
       session[:user_id] = user.id
       get :callback, params: { provider: 'google', code: '123' }
@@ -12,14 +12,14 @@ RSpec.describe OauthsController do
     end
 
     it 'displays an error if user is not logged in and their google account is not linked' do
-      OauthsController.any_instance.should_receive(:login_from).and_return(false)
+      Home::OauthsController.any_instance.should_receive(:login_from).and_return(false)
 
       get :callback, params: { provider: 'google', code: '123' }
       expect(flash[:danger]).to be_present
     end
 
     xit 'should create user' do
-      OauthsController.any_instance.should_receive(:create_from).with('google').and_return(User.create)
+      Home::OauthsController.any_instance.should_receive(:create_from).with('google').and_return(User.create)
       user = create(:user)
       session[:user_id] = user.id
       get :callback, params: { provider: 'google', code: '1234' }

@@ -12,7 +12,7 @@ describe "Pack pages" do
       create(:pack, user_id: user.id)
       create(:pack, user_id: user.id)
       login_user(user.email, valid_password)
-      visit packs_path
+      visit dashboard_packs_path
     end
 
     it { should have_content('All packs') }
@@ -31,7 +31,7 @@ describe "Pack pages" do
   describe "show page" do
     before do
       login_user(user.email, valid_password)
-      visit pack_path(pack)
+      visit dashboard_pack_path(pack)
     end
 
     it { should have_content(pack.name) }
@@ -41,7 +41,7 @@ describe "Pack pages" do
   describe "new pack page" do
     before do
       login_user(user.email, valid_password)
-      visit new_pack_path
+      visit new_dashboard_pack_path
     end
 
     describe "page" do
@@ -72,7 +72,7 @@ describe "Pack pages" do
   describe "edit pack page" do
     before do
       login_user(user.email, valid_password)
-      visit edit_pack_path(pack)
+      visit edit_dashboard_pack_path(pack)
     end
 
     describe "page" do
@@ -113,7 +113,7 @@ describe "Pack pages" do
     before do
       create(:pack, user_id: user.id)
       login_user(user.email, valid_password)
-      visit packs_path
+      visit dashboard_packs_path
     end
 
     it { should have_link('Delete') }
