@@ -40,3 +40,6 @@ Metrics/AbcSize:
 
 Style/FormatStringToken:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false

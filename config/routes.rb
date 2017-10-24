@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :packs
     resources :user_sessions, only: :destroy
     resources :users, only: [:edit, :update, :show]
-    resources :cards do 
+    resources :cards do
       member do
         post "check"
       end
