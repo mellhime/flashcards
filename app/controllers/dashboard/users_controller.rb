@@ -1,4 +1,4 @@
-module Dashboard  
+module Dashboard
   class UsersController < ApplicationController
     before_action :find_user, only: [:show, :destroy]
 

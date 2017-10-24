@@ -1,4 +1,4 @@
-module Dashboard  
+module Dashboard
   class PacksController < ApplicationController
     before_action :find_pack, only: [:show, :edit, :update, :destroy]
 
