@@ -38,11 +38,11 @@ describe "Authentication" do
       end
 
       it { should have_title('All users') }
-      it { should have_link('Edit profile', href: edit_user_path(user)) }
+      it { should have_link('Edit profile', href: edit_dashboard_user_path(user)) }
       it { should have_link('Logout', href: logout_path) }
-      it { should have_link('New card', href: new_card_path) }
-      it { should have_link('Add pack', href: new_pack_path) }
-      it { should have_link('All packs', href: packs_path) }
+      it { should have_link('New card', href: new_dashboard_card_path) }
+      it { should have_link('Add pack', href: new_dashboard_pack_path) }
+      it { should have_link('All packs', href: dashboard_packs_path) }
       it { should_not have_link('Login', href: login_path) }
 
       describe "followed by logout" do
@@ -53,7 +53,7 @@ describe "Authentication" do
 
     describe "when attempting to visit a protected page" do
       before do
-        visit edit_user_path(user)
+        visit edit_dashboard_user_path(user)
       end
 
       it "should have error message" do
@@ -63,7 +63,7 @@ describe "Authentication" do
 
     describe "when attempting to visit a protected page" do
       before do
-        visit edit_user_path(user)
+        visit edit_dashboard_user_path(user)
         fill_in "email",    with: user.email
         fill_in "password", with: valid_password
         click_button "Login"

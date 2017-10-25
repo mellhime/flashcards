@@ -13,7 +13,7 @@ describe "Card pages" do
       create(:card, original_text: "Example", translated_text: "Пример", user_id: user.id)
       create(:card, original_text: "NewExample", translated_text: "НовыйПример", user_id: user.id)
       login_user(user.email, valid_password)
-      visit cards_path
+      visit dashboard_cards_path
     end
 
     it { should have_content('All cards') }
@@ -32,7 +32,7 @@ describe "Card pages" do
   describe "show page" do
     before do
       login_user(user.email, valid_password)
-      visit card_path(card)
+      visit dashboard_card_path(card)
     end
     it { should have_content(card.original_text) }
     it { should have_title(card.original_text) }
@@ -43,11 +43,11 @@ describe "Card pages" do
   describe "new card page" do
     before do
       login_user(user.email, valid_password)
-      visit new_pack_path
+      visit new_dashboard_pack_path
       fill_in "Name", with: "Example"
       find(:css, "#current").set(0)
       click_button "Create Pack"
-      visit new_card_path
+      visit new_dashboard_card_path
     end
 
     describe "page" do
@@ -103,11 +103,11 @@ describe "Card pages" do
   describe "edit card page" do
     before do
       login_user(user.email, valid_password)
-      visit new_pack_path
+      visit new_dashboard_pack_path
       fill_in "Name", with: "Example"
       find(:css, "#current").set(0)
       click_button "Create Pack"
-      visit edit_card_path(card)
+      visit edit_dashboard_card_path(card)
     end
 
     describe "page" do
@@ -150,7 +150,7 @@ describe "Card pages" do
     before do
       create(:card, user_id: user.id)
       login_user(user.email, valid_password)
-      visit cards_path
+      visit dashboard_cards_path
     end
 
     it { should have_link('Delete') }
@@ -196,7 +196,7 @@ describe "Card pages" do
         visit root_path
       end
 
-      it { expect(current_path).to eql(cards_path) }
+      it { expect(current_path).to eql(dashboard_cards_path) }
       it { expect(page).to have_content('No cards to review') }
     end
   end

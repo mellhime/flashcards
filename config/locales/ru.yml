@@ -6,94 +6,98 @@ ru:
           attributes:
             image_url:
               url: неверный URL
-  user_sessions:
-    new:
-      login: Вход
-      email: Электронная почта
-      password: Пароль
-    form:
-      email: Электронная почта
-      password: Пароль
-      login: Вход
-    create:
-      success: Успешный вход
-      danger: Не удалось войти
-    destroy:
-      notice: Вы вышли!
-  users:
-    new:
-      new_user: Новый пользователь
-    edit:
-      edit_user: Редактировать
-    index:
-      all_users: Все пользователи
-    show:
-      name: Имя
-      email: Эл.почта
-      edit: Редактировать
-      delete: Удалить
-      confirmation: Вы уверены?
-    create:
-      success: Добро пожаловать во Флэшкардер
-    update:
-      success: Успешно обновлено
-  packs:
-    new:
-      new_pack: Новая колода
-    edit:
-      edit_pack: Редактировать колоду
-    index:
-      all_packs: Все колоды
-      count: Количество карточек
-      name: Название
-      show: Перейти
-      edit: Редактировать
-      delete: Удалить
-      confirmation: Вы уверены?
-    show:
-      name: Название
-      review_date: Дата проверки
-      original_text: Слово
-      translated_text: Перевод
-      show: Перейти
-      edit: Редактировать
-      delete: Удалить
-      confirmation: Вы уверены?
-    form:
-      current: Сделать текущей?
-  cards:
-    new:
-      new_card: Новая карточка
-    edit:
-      edit_card: Редактировать
-    random:
-      next_card: Следующая карточка
-      danger: Нет карточек для проверки
-    check:
-      success: Правильно!
-      danger: Неправильно!
-    index:
-      all_cards: Все карточки
-      count: Кол-во проверок
-      original_text: Слово
-      translated_text: Перевод
-      review_date: Дата проверки
-      pack: Колода
-      show: Перейти
-      edit: Редактировать
-      delete: Удалить
-      confirmation: Вы уверены?
-    show:
-      original_text: Слово
-      translated_text: Перевод
-      image: Изображение
-      pack: Колода
-    random_form:
-      check: Проверить
-  oauths:
-    callback:
-      success: "Удачный вход!"
-      danger: "Неудачный вход!"
+  home:
+    user_sessions:
+      new:
+        login: Вход
+        email: Электронная почта
+        password: Пароль
+      form:
+        email: Электронная почта
+        password: Пароль
+        login: Вход
+      create:
+        success: Успешный вход
+        danger: Не удалось войти
+    users:
+      new:
+        new_user: Новый пользователь
+      create:
+        success: Добро пожаловать во Флэшкардер
+      index:
+        all_users: Все пользователи
+      edit:
+        edit_user: Редактировать
+    oauths:
+      callback:
+        success: "Удачный вход!"
+        danger: "Неудачный вход!"
+  dashboard:
+    user_sessions:
+      destroy:
+        notice: Вы вышли!
+    users:
+      show:
+        name: Имя
+        email: Эл.почта
+        edit: Редактировать
+        delete: Удалить
+        confirmation: Вы уверены?
+      update:
+        success: Успешно обновлено
+    packs:
+      new:
+        new_pack: Новая колода
+      edit:
+        edit_pack: Редактировать колоду
+      index:
+        all_packs: Все колоды
+        count: Количество карточек
+        name: Название
+        show: Перейти
+        edit: Редактировать
+        delete: Удалить
+        confirmation: Вы уверены?
+      show:
+        name: Название
+        review_date: Дата проверки
+        original_text: Слово
+        translated_text: Перевод
+        show: Перейти
+        edit: Редактировать
+        delete: Удалить
+        confirmation: Вы уверены?
+      form:
+        current: Сделать текущей?
+    cards:
+      new:
+        new_card: Новая карточка
+      edit:
+        edit_card: Редактировать
+      random:
+        next_card: Следующая карточка
+        danger: Нет карточек для проверки
+      check:
+        success: Правильно!
+        danger: Неправильно!
+      index:
+        all_cards: Все карточки
+        count: Кол-во проверок
+        original_text: Слово
+        translated_text: Перевод
+        review_date: Дата проверки
+        pack: Колода
+        show: Перейти
+        edit: Редактировать
+        delete: Удалить
+        confirmation: Вы уверены?
+      show:
+        original_text: Слово
+        translated_text: Перевод
+        image: Изображение
+        pack: Колода
+      random_form:
+        check: Проверить
   layouts:
     application:
       title: Флэшкардер

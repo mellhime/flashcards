@@ -9,7 +9,7 @@
   <%= @user.email %>
 </p>
 <ul class="list-inline">
-  <li><%= link_to "#{t '.edit'}", edit_user_path(@user) %></li>
-  <li><%= link_to "#{t '.delete'}", user_path(@user), method: :delete, data: { confirm:
+  <li><%= link_to "#{t '.edit'}", edit_dashboard_user_path(@user) %></li>
+  <li><%= link_to "#{t '.delete'}", dashboard_user_path(@user), method: :delete, data: { confirm:
     "#{t '.confirmation'}" } %></li>
 </ul>

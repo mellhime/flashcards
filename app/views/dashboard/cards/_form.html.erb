@@ -1,5 +1,5 @@
 <div class="col-xs-3">
-  <%= simple_form_for @card, html: { multipart: true } do |f| %>
+  <%= simple_form_for [:dashboard, @card], html: { multipart: true } do |f| %>
     <% if @card.errors.any? %>
       <div id="error_explanation">
         <h2>
@@ -19,7 +19,7 @@
   <% unless @packs.nil? %>
     <%= f.input :pack_id, collection: @packs %>
   <% end %>
-  <p><%= link_to "#{t '.create_pack'}", new_pack_path %><p>
+  <p><%= link_to "#{t '.create_pack'}", new_dashboard_pack_path %><p>
   <p><%= f.input :image, as: :file %></p>
   <p><%= f.input :image_url %></p>
   <p><%= f.button :submit, class: "btn btn-large btn-primary"%></p>

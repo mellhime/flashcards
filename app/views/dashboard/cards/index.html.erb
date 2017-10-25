@@ -1,0 +1,33 @@
+<% provide(:title, 'All cards') %>
+<h1><%= t '.all_cards' %></h1>
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th><%= t '.original_text' %></th>
+        <th><%= t '.translated_text' %></th>
+        <th><%= t '.review_date' %></th>
+        <th><%= t '.pack' %></th>
+        <th><%= t '.count' %></th>
+        <th><%= t '.show' %></th>
+        <th><%= t '.edit' %></th>
+        <th><%= t '.delete' %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @cards.each do |card| %>
+        <tr>
+          <td><%= card.original_text %></td>
+          <td><%= card.translated_text %></td>
+          <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+          <td><%= card.pack.name if card.pack %></td>
+          <td><%= card.review_status %></td>
+          <td><%= link_to "#{t '.show'}", dashboard_card_path(card) %></td>
+          <td><%= link_to "#{t '.edit'}", edit_dashboard_card_path(card) %></td>
+          <td><%= link_to "#{t '.delete'}", dashboard_card_path(card), method: :delete, data: { confirm:
+            "#{t '.confirmation'}" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

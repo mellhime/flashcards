@@ -1,7 +1,7 @@
 <div class="col-xs-3">
   <h2><%= card.translated_text %></h2>
   <p><%= image_tag(card.image.url(:thumb)) if card.image.exists? %></p>
-  <%= form_tag(check_card_path(card), remote: true) do |f| %>
+  <%= form_tag(check_dashboard_card_path(card), remote: true) do |f| %>
     <p><%= text_field_tag :user_text %></p>
     <p><%= hidden_field_tag :seconds %></p>
     <p><%= button_tag "#{t '.check'}", onclick: 'restartTimer()' %></p>

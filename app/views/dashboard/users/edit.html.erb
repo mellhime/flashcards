@@ -1,0 +1,11 @@
+<% provide(:title, 'Edit profile') %>
+<h2><%= t '.edit_user' %></h2>
+<%= render(partial: 'shared/form', locals: { namespace: :dashboard }) %>
+<%= simple_form_for [:dashboard, @user] do |f| %>
+  <div class="field">
+    <%= f.input :locale, collection: @locales %>
+  </div>
+   <div class="actions">
+    <%= f.button :submit, id: "update_locale", class: "btn btn-large btn-primary"%>
+  </div>
+<% end %>

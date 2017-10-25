@@ -3,7 +3,7 @@
 <ul class="list-group-item" ss="list-group">
   <% @users.each do |user| %>
     <li class="list-group-item">
-      <%= link_to user.name, user %>
+      <%= link_to user.name, dashboard_user_url(user) %>
       <%= user.email %>
     </li>
   <% end %>
