@@ -1,21 +1,18 @@
-# Load DSL and set up stages
-require "capistrano/setup"
+# Load DSL and Setup Up Stages
+require 'capistrano/setup'
 
-# Include default deployment tasks
-require "capistrano/deploy"
+# Includes default deployment tasks
+require 'capistrano/deploy'
 
-# Load the SCM plugin appropriate to your project:
-#
-# require "capistrano/scm/hg"
-# install_plugin Capistrano::SCM::Hg
-# or
-# require "capistrano/scm/svn"
-# install_plugin Capistrano::SCM::Svn
-# or
-require "capistrano/scm/git"
-install_plugin Capistrano::SCM::Git
+require 'capistrano/bundler'
+require 'capistrano/rails'
+require 'capistrano/rvm'
+require 'capistrano/ssh_doctor'
 
-# Include tasks from other gems included in your Gemfile
+set :rvm_type, :user
+set :rvm_ruby_version, '2.4.1'
+
+# Includes tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
 #
@@ -24,13 +21,13 @@ install_plugin Capistrano::SCM::Git
 #   https://github.com/capistrano/chruby
 #   https://github.com/capistrano/bundler
 #   https://github.com/capistrano/rails
-#   https://github.com/capistrano/passenger
 #
-require 'capistrano/bundler'
-require 'capistrano/rvm'
-require 'capistrano/rails/assets' # for asset handling add
-require 'capistrano/rails/migrations' # for running migrations
-require 'capistrano/puma'
+# require 'capistrano/rvm'
+# require 'capistrano/rbenv'
+# require 'capistrano/chruby'
+# require 'capistrano/bundler'
+# require 'capistrano/rails/assets'
+# require 'capistrano/rails/migrations'
 
-# Load custom tasks from `lib/capistrano/tasks` if you have any defined
-Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
+# Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
+Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
