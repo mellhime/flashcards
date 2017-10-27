@@ -5,7 +5,7 @@ set :application, 'flashcards'
 set :repo_url, 'git@github.com:mellhime/flashcards.git'
 set :branch, 'VPS'
 
-set :deploy_to, '/home/ubuntu/deploy/'
+set :deploy_to, '~/ubuntu/flashcards/'
 
 set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
