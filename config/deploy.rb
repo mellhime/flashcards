@@ -12,8 +12,11 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 
 set :ssh_options, { user: 'ubuntu', keys: %w(~/.ssh/flashcards-VPS.pem), forward_agent: true }
 
-namespace :deploy do
+set :rvm_type, :user
+set :rvm_ruby_version, '2.4.1'
+set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 
+namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
